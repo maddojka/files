@@ -4,3 +4,6 @@ out
 *.iml
 
 src/lesson01/Lesson01.java
+src/lesson02/DataTypes.java
+sct/lesson03/RelationalAndLogicalOperations.java
+resources
