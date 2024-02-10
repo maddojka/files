@@ -28,9 +28,15 @@ public class Homework {
         firstFloatValue = secondFloatValue - firstFloatValue;
         secondFloatValue =  secondFloatValue - firstFloatValue;
         System.out.println("4. First number is equal to " + firstFloatValue + ", second number is equal to " + secondFloatValue);
-        /* doubleResult01 имеет тип double
-         doubleResult01 имеет значение 1.0, так как сперва мы вычисляем значение в скобках (int отбрасывает целую часть)
-         далее идёт преобразование к типу double, потому что происходит явное преобразование к типу double в скобках.
+        /* doubleResult01 РёРјРµРµС‚ С‚РёРї double
+         doubleResult01 РёРјРµРµС‚ Р·РЅР°С‡РµРЅРёРµ 1.0, С‚Р°Рє РєР°Рє СЃРїРµСЂРІР° РјС‹ РІС‹С‡РёСЃР»СЏРµРј Р·РЅР°С‡РµРЅРёРµ РІ СЃРєРѕР±РєР°С… (int РѕС‚Р±СЂР°СЃС‹РІР°РµС‚ С†РµР»СѓСЋ С‡Р°СЃС‚СЊ)
+         РґР°Р»РµРµ РёРґС‘С‚ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Рє С‚РёРїСѓ double, РїРѕС‚РѕРјСѓ С‡С‚Рѕ РїСЂРѕРёСЃС…РѕРґРёС‚ СЏРІРЅРѕРµ РїСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Рє С‚РёРїСѓ double РІ СЃРєРѕР±РєР°С….
         */
+        int sum = 10;
+        sum = sum + 10; // 20
+        sum -= 10;
+        sum *= 10;
+        sum /= 10;
+        sum %= 10;
     }
 }
