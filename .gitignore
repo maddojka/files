@@ -6,4 +6,7 @@ out
 src/lesson01/Lesson01.java
 src/lesson02/DataTypes.java
 sct/lesson03/RelationalAndLogicalOperations.java
-resources
+resources/
+stepik/
+src/lesson04/ForAndWhile.java
+src/lesson04/IncrementAndDecrement.java
