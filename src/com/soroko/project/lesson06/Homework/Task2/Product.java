@@ -1,4 +1,4 @@
-package com.soroko.project.lesson06.Homework;
+package com.soroko.project.lesson06.Homework.Task2;
 
 public class Product {
     private String productName;
