@@ -6,7 +6,7 @@ public class MyPermittedProducts {
     final double MAX_FATS = 5.0;
     final double MAX_CARBS = 15.0;
     final int MAX_CALORIES = 40;
-    Product product;
+    private Product product;
 
     public MyPermittedProducts() {
     }

@@ -1,9 +1,9 @@
 package com.soroko.project.lesson06.Homework.Task1;
 
 public class Group {
-    String groupOpen;
-    Climber[] climber;
-    Mountain mountain;
+    private String groupOpen;
+    private Climber[] climber;
+    private Mountain mountain;
 
     public Group() {
     }
@@ -16,15 +16,22 @@ public class Group {
         this.mountain = mountain;
     }
 
-    public void addClimber(Climber[] climber) {
+    public void addClimber(Climber climber) {
         if (getGroupOpen().equals("YES")) {
-
-        } else {
-            return;
+            for (int i = 0; i < getClimber().length; i++) {
+                if (getClimber()[i] == null) {
+                    getClimber()[i] = climber;
+                    break;
+                }
+            }
         }
     }
 
     public String getGroupOpen() {
         return groupOpen;
+    }
+
+    public Climber[] getClimber() {
+        return climber;
     }
 }
