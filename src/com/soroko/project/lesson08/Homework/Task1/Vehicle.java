@@ -34,7 +34,7 @@ public class Vehicle {
     }
 
     public void setCarNumber(String carNumber) {
-        if ("".equals(carNumber)) throw new IllegalArgumentException("Номер не может быть пустой строкой");
+        if ("".equals(carNumber)) throw new IllegalArgumentException("The car number cannot be empty");
         this.carNumber = carNumber;
     }
 
@@ -44,7 +44,7 @@ public class Vehicle {
 
     public void setVehicleDepreciation(int vehicleDepreciation) {
         if (vehicleDepreciation < 0 || vehicleDepreciation > 100)
-            throw new IllegalArgumentException("Износ должен быть от 0 до 100");
+            throw new IllegalArgumentException("The vehicle deprecation should be between 0 and 100");
         this.vehicleDepreciation = vehicleDepreciation;
     }
 
@@ -53,7 +53,8 @@ public class Vehicle {
     }
 
     public void setMaxSpeed(int maxSpeed) {
-        if (maxSpeed < 10 || maxSpeed > 1000) throw new IllegalArgumentException("Скорость должна быть от 10 до 1000");
+        if (maxSpeed < 10 || maxSpeed > 1000)
+            throw new IllegalArgumentException("The velocity should be between 10 and 1000");
         this.maxSpeed = maxSpeed;
     }
 

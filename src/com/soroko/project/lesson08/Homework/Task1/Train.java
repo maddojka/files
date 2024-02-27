@@ -31,7 +31,7 @@ public class Train extends Vehicle {
 
     public void setAmountOfWagons(int amountOfWagons) {
         if (amountOfWagons < 1 || amountOfWagons > 100)
-            throw new IllegalArgumentException(" оличество вагонов должно быть от 1 до 100");
+            throw new IllegalArgumentException("The amount of wagons should be between 1 and 100");
         this.amountOfWagons = amountOfWagons;
     }
 

@@ -35,7 +35,7 @@ public class Bicycle extends Vehicle {
 
     private void setAmountOfWheels(int amountOfWheels) {
         if (amountOfWheels < 2 || amountOfWheels > 10)
-            throw new IllegalArgumentException(" оличество колес должно быть от 2 до 10");
+            throw new IllegalArgumentException("The amount of wheels should be between 2 and 10");
         this.amountOfWheels = amountOfWheels;
     }
 
@@ -45,7 +45,7 @@ public class Bicycle extends Vehicle {
 
     private void setType(String type) {
         if ("".equals(type))
-            throw new IllegalArgumentException("“ип транспорта не может быть пустой строкой");
+            throw new IllegalArgumentException("The type of a vehicle cannot be empty");
         this.type = type;
     }
 
