@@ -1,8 +1,7 @@
 package com.soroko.project.lesson08.Homework;
 
 import com.soroko.project.lesson08.Homework.Task1.*;
-
-import java.util.Arrays;
+import com.soroko.project.lesson08.Homework.Task2.Workshop;
 
 public class Homework08 {
     public static void main(String[] args) {

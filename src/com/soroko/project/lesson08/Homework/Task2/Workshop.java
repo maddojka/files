@@ -1,4 +1,6 @@
-package com.soroko.project.lesson08.Homework.Task1;
+package com.soroko.project.lesson08.Homework.Task2;
+
+import com.soroko.project.lesson08.Homework.Task1.Vehicle;
 
 public class Workshop {
     private Vehicle vehicles[];
