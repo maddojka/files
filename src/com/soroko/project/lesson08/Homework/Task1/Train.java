@@ -46,7 +46,7 @@ public class Train extends Vehicle {
     @Override
     public void repair() {
         if (vehicleDepreciation <= 0) return;
-        if (vehicleDepreciation > 7) vehicleDepreciation -= 1;
+        if (amountOfWagons > 7) vehicleDepreciation -= 1;
         else vehicleDepreciation -= 2;
     }
 }
