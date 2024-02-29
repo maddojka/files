@@ -63,6 +63,4 @@ abstract public class Unit {
     public void rest() {
         if (healthPoint > 0 && healthPoint < initialHealthPoint) healthPoint += 2;
     }
-
-    ;
 }

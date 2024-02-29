@@ -18,15 +18,13 @@ abstract public class BattleUnit extends Unit {
         this.attackDamage = attackDamage;
     }
 
+    public abstract void attack(Unit unit);
+
     @Override
     public void rest() {
         if (healthPoint > 0 && healthPoint < initialHealthPoint) healthPoint += 2;
         if (healthPoint > initialHealthPoint) healthPoint = initialHealthPoint;
     }
-
-    public abstract void attack(Unit unit);
-
-
 }
 
 
