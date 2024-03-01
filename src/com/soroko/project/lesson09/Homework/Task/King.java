@@ -44,13 +44,12 @@ public class King extends Unit {
         }
         if (countFirstUnits > countSecondUnits) FirstKingWon = true;
         if (FirstKingWon) {
-            firstKing.amountOfMoney *= 2;
             secondKing.amountOfMoney /= 2;
+            firstKing.amountOfMoney += secondKing.amountOfMoney;
         } else {
             firstKing.amountOfMoney /= 2;
-            secondKing.amountOfMoney /= 2;
+            secondKing.amountOfMoney += firstKing.amountOfMoney;
         }
-
     }
 
     @Override
