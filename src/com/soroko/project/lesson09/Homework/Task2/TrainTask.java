@@ -5,10 +5,10 @@ import java.util.LinkedList;
 public class TrainTask {
     public static void main(String[] args) {
 
-        LinkedList wagons = new LinkedList<>();
+        Wagon[] wagons;
         // Create locomotive
         Wagon locomotive = new Wagon("Звезда", "пассажирский", 2);
-        Train train = new Train("91B", locomotive, wagons);
+        Train train = new Train("91B", locomotive, 0);
         // Create the data of wagons
         Wagon wagon01 = new Wagon("01", "пассажирский", 60, locomotive);
         Wagon wagon02 = new Wagon("02", "пассажирский", 50, wagon01);
@@ -16,21 +16,24 @@ public class TrainTask {
         Wagon wagon04 = new Wagon("04", "пассажирский", 60, wagon03);
         Wagon wagon05 = new Wagon("05", "пассажирский", 60, wagon04);
         Wagon wagon06 = new Wagon("06", "пассажирский", 60, wagon05);
-        Wagon wagonRestaurant = new Wagon("00", "ресторан", 20, wagon02);
+        Wagon wagonRestaurant = new Wagon("00", "ресторан", 20);
         // Add wagons
-        wagons.add(locomotive);
-        wagons.add(wagon01);
-        wagons.add(wagon02);
-        wagons.add(wagon03);
-        wagons.add(wagon04);
-        wagons.add(wagon05);
-        // add wagon restaurant in the middle
-        train.addMiddle(wagonRestaurant);
-        // remove last wagon
+        train.addWagon(locomotive);
+        train.addWagon(wagon01);
+        train.addWagon(wagon02);
+        train.addWagon(wagon03);
+        train.addWagon(wagon04);
+        train.addWagon(wagon05);
         train.removeWagon();
-        // add last wagon
-        train.addWagon(wagon06);
-        System.out.println(train);
+
+        // add wagon restaurant in the middle
+        System.out.println(wagon04.getWagon());
+        System.out.println();
+        train.addMiddle(wagonRestaurant);
+        // Print wagons
+        train.print();
+        System.out.println();
+        System.out.println(wagon04.getWagon());
         System.out.println("Количество вагонов " + train.amountOfWagons());
     }
 }

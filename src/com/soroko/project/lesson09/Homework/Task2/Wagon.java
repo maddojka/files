@@ -23,6 +23,14 @@ public class Wagon {
       return number;
    }
 
+   public Wagon getWagon() {
+      return wagon;
+   }
+
+   public void setWagon(Wagon wagon) {
+      this.wagon = wagon;
+   }
+
    @Override
    public String toString() {
       return  "Номер " + number +
