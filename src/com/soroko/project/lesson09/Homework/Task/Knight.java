@@ -12,9 +12,18 @@ public class Knight extends BattleUnit {
     }
 
     @Override
-    public void attack(Unit unit) {
-        if (unit.movementSpeed <= movementSpeed && unit.healthPoint > 0 && healthPoint >= 1)
-            unit.healthPoint -= attackDamage;
-        else unit.healthPoint = 0;
+    public void attacks(Unit unit) {
+        if (unit.movementSpeed <= movementSpeed) unit.healthPoint -= attackDamage;
+        if (unit instanceof Knight && ((Knight) unit).healthPoint >= 2) {
+            healthPoint -= ((Knight) unit).attackDamage;
+        }
+        if (unit.healthPoint < 0) unit.healthPoint = 0;
+        if (healthPoint < 0) healthPoint = 0;
+    }
+
+    @Override
+    public String toString() {
+        String name = "Рыцарь";
+        return name + " здоровье: " + healthPoint + " передвижение: " + movementSpeed + " сила атаки " + attackDamage;
     }
 }

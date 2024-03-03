@@ -12,8 +12,19 @@ public class Infantry extends BattleUnit {
     }
 
     @Override
-    public void attack(Unit unit) {
-        if (unit.healthPoint > 0) unit.healthPoint -= attackDamage;
-        else unit.healthPoint = 0;
+    public void attacks(Unit unit) {
+        if (healthPoint > 5) unit.healthPoint -= attackDamage;
+        else if (healthPoint <= 5 && healthPoint > 0) unit.healthPoint -= (attackDamage * 2);
+        if (unit instanceof Knight && ((Knight) unit).healthPoint >= 1) {
+            healthPoint -= ((Knight) unit).attackDamage;
+        }
+        if (unit.healthPoint < 0) unit.healthPoint = 0;
+        if (healthPoint < 0) healthPoint = 0;
+    }
+
+    @Override
+    public String toString() {
+        String name = "Пехотинец";
+        return name + " здоровье: " + healthPoint + " передвижение: " + movementSpeed + " сила атаки " + attackDamage;
     }
 }

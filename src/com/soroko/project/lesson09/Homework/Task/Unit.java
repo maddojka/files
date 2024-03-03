@@ -35,7 +35,7 @@ abstract public class Unit {
     }
 
     public void setHealthPoint(int healthPoint) {
-        if (healthPoint <= 0 || healthPoint > 100)
+        if (healthPoint < 0 || healthPoint > 100)
             throw new IllegalArgumentException("Health should be between 0 and 100");
         this.healthPoint = healthPoint;
     }
@@ -62,5 +62,7 @@ abstract public class Unit {
 
     public void rest() {
         if (healthPoint > 0 && healthPoint < initialHealthPoint) healthPoint += 2;
+        if (healthPoint > initialHealthPoint) healthPoint = initialHealthPoint;
     }
+
 }

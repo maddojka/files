@@ -1,6 +1,7 @@
 package com.soroko.project.lesson09.Homework.Task;
 
-public class Healer extends Unit implements Healing {
+public class Healer extends Unit implements Healable {
+    private String name = "Целитель";
 
     public Healer(int healthPoint, int movementSpeed) {
         super(healthPoint, movementSpeed);
@@ -13,7 +14,12 @@ public class Healer extends Unit implements Healing {
 
     @Override
     public void heal(Unit unit) {
-        if (unit.healthPoint > 0 && unit.healthPoint < unit.initialHealthPoint) unit.healthPoint += 100;
-        if (unit.healthPoint > unit.initialHealthPoint) unit.healthPoint = unit.initialHealthPoint;
+        if (unit.healthPoint > 0 && unit.healthPoint < unit.initialHealthPoint)
+            unit.healthPoint = unit.initialHealthPoint;
+    }
+
+    @Override
+    public String toString() {
+        return name + " здоровье: " + healthPoint + " передвижение: " + movementSpeed;
     }
 }
