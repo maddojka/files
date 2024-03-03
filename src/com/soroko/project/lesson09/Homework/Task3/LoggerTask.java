@@ -9,7 +9,7 @@ public class LoggerTask {
     public static void main(String[] args) {
 
         String filename = "file.txt";
-        String data = "сообщение";
+        String data = "This file has no data";
         try {
             Files.writeString(Path.of(filename), data, StandardOpenOption.CREATE, StandardOpenOption.APPEND);
         } catch (IOException e) {
@@ -18,22 +18,22 @@ public class LoggerTask {
 
         AppLogger logger01 = new Delimiter(new Upper(new ConsoleWriter()));
 
-        // к сообщению будет добавлен символ точки с запятой (;) - возможности Delimiter
-        // текст сообщения будет приведен к верзнему регистру  - возможности Upper
-        // данные будут выведены в консоль  - возможности ConsoleWriter
-        logger01.log("сообщение");
+        // Рє СЃРѕРѕР±С‰РµРЅРёСЋ Р±СѓРґРµС‚ РґРѕР±Р°РІР»РµРЅ СЃРёРјРІРѕР» С‚РѕС‡РєРё СЃ Р·Р°РїСЏС‚РѕР№ (;) - РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё Delimiter
+        // С‚РµРєСЃС‚ СЃРѕРѕР±С‰РµРЅРёСЏ Р±СѓРґРµС‚ РїСЂРёРІРµРґРµРЅ Рє РІРµСЂР·РЅРµРјСѓ СЂРµРіРёСЃС‚СЂСѓ  - РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё Upper
+        // РґР°РЅРЅС‹Рµ Р±СѓРґСѓС‚ РІС‹РІРµРґРµРЅС‹ РІ РєРѕРЅСЃРѕР»СЊ  - РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё ConsoleWriter
+        logger01.log(data);
 
         AppLogger logger02 = new Upper(new Delimiter(new AppFileWriter(filename)));
 
-        // текст сообщения будет приведен к верзнему регистру  - возможности Upper
-        // к сообщению будет добавлен символ точки с запятой (;) - возможности Delimiter
-        // данные будут записаны в файл  - возможности ConsoleWriter
-        logger02.log("сообщение");
+        // С‚РµРєСЃС‚ СЃРѕРѕР±С‰РµРЅРёСЏ Р±СѓРґРµС‚ РїСЂРёРІРµРґРµРЅ Рє РІРµСЂР·РЅРµРјСѓ СЂРµРіРёСЃС‚СЂСѓ  - РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё Upper
+        // Рє СЃРѕРѕР±С‰РµРЅРёСЋ Р±СѓРґРµС‚ РґРѕР±Р°РІР»РµРЅ СЃРёРјРІРѕР» С‚РѕС‡РєРё СЃ Р·Р°РїСЏС‚РѕР№ (;) - РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё Delimiter
+        // РґР°РЅРЅС‹Рµ Р±СѓРґСѓС‚ Р·Р°РїРёСЃР°РЅС‹ РІ С„Р°Р№Р»  - РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё ConsoleWriter
+        logger02.log(data);
 
         ConsoleWriter console = new ConsoleWriter();
-        console.log(filename); // данные будут выведены в консоль
+        console.log(filename); // РґР°РЅРЅС‹Рµ Р±СѓРґСѓС‚ РІС‹РІРµРґРµРЅС‹ РІ РєРѕРЅСЃРѕР»СЊ
 
-        AppFileWriter file = new AppFileWriter("file.txt");
-        file.log(filename); // данные будут записаны в файл
+        AppFileWriter file = new AppFileWriter(filename);
+        file.log(filename); // РґР°РЅРЅС‹Рµ Р±СѓРґСѓС‚ Р·Р°РїРёСЃР°РЅС‹ РІ С„Р°Р№Р»
     }
 }
