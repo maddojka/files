@@ -6,7 +6,8 @@ import com.soroko.project.homework11.task.images.Gallery;
 import com.soroko.project.homework11.task.images.Image;
 
 public class Homework {
-    public static void main(String[] args) throws CloneNotSupportedException {
+    public static void main(String[] args)  {
+
         // clone task
         Image image1 = new Image("Картина1");
         Image image2 = new Image("Картина2");

@@ -16,9 +16,14 @@ public final class Editor implements Cloneable {
     }
 
     @Override
-    public Editor clone() throws CloneNotSupportedException {
-        Editor cloned = (Editor) super.clone();
-        return cloned;
+    public Editor clone() {
+        try {
+            Editor cloned = (Editor) super.clone();
+            return cloned;
+        } catch (CloneNotSupportedException ex) {
+            System.out.println("Клонирование не поддерживается");
+            return null;
+        }
     }
 
     @Override

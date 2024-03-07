@@ -17,7 +17,7 @@ public class Image implements Drawable, Cloneable {
     }
 
     @Override
-    public Image clone() {
+    public Image clone()  {
         try {
             return (Image) super.clone();
         } catch (CloneNotSupportedException e) {
