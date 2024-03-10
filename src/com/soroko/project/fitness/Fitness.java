@@ -2,23 +2,26 @@ package com.soroko.project.fitness;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
 
 public class Fitness {
-    private final int SUB_SIZE = 2;
+    private final int ZONE_SIZE = 20;
     private final String GYM_ZONE = "тренажерный зал";
     private final String POOL_ZONE = "бассейн";
     private final String GROUP_ZONE = "групповые занятия";
     private final String GYM_IS_FULL = "В тренажерном зале нет свободных мест";
     private final String POOL_IS_FULL = "В бассейне нет свободных мест";
     private final String GROUP_IS_FULL = "На групповых занятиях нет свободных мест";
+    private final LocalDate CURR_DATE = LocalDate.now();
+    private final LocalTime CURR_TIME = LocalTime.now();
     private final LocalDateTime CURR_DATE_TIME = LocalDateTime.now();
     private final static LocalDate MIN_DATE = LocalDate.MIN;
-    private Subscription[] gymZone = new Subscription[SUB_SIZE];
-    private Subscription[] poolZone = new Subscription[SUB_SIZE];
-    private Subscription[] groupZone = new Subscription[SUB_SIZE];
+    private Subscription[] gymZone = new Subscription[ZONE_SIZE];
+    private Subscription[] poolZone = new Subscription[ZONE_SIZE];
+    private Subscription[] groupZone = new Subscription[ZONE_SIZE];
 
     public Subscription[] getGymZone() {
         return gymZone;
@@ -39,7 +42,7 @@ public class Fitness {
             if (gymZone[i] == null) {
                 gymZone[i] = subscription;
                 isFull = false;
-                System.out.println(subscription.getSurname() + " " + subscription.getName() + GYM_ZONE);
+                System.out.println(subscription.getSurname() + " " + subscription.getName() + " " + GYM_ZONE);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
                 String text = dtf.format(CURR_DATE_TIME);
                 System.out.println(text);
@@ -61,7 +64,7 @@ public class Fitness {
             if (poolZone[i] == null) {
                 poolZone[i] = subscription;
                 isFull = false;
-                System.out.println(subscription.getSurname() + " " + subscription.getName() + POOL_ZONE);
+                System.out.println(subscription.getSurname() + " " + subscription.getName() + " " + POOL_ZONE);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
                 String text = dtf.format(CURR_DATE_TIME);
                 System.out.println(text);
@@ -83,7 +86,7 @@ public class Fitness {
             if (groupZone[i] == null) {
                 groupZone[i] = subscription;
                 isFull = false;
-                System.out.println(subscription.getSurname() + " " + subscription.getName() + GROUP_ZONE);
+                System.out.println(subscription.getSurname() + " " + subscription.getName() + " " + GROUP_ZONE);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
                 String text = dtf.format(CURR_DATE_TIME);
                 System.out.println(text);
@@ -99,14 +102,33 @@ public class Fitness {
     }
 
     public void addToDesiredZone(String zone, Subscription subscription) {
-        if (zone.equalsIgnoreCase(GYM_ZONE) &&
-                (subscription.getAccess() == 1 || subscription.getAccess() == 2 || subscription.getAccess() == 3)) {
+        for (int i = 0; i < ZONE_SIZE; i++) {
+            if (subscription.equals(gymZone[i])
+                    || subscription.equals(poolZone[i]) || subscription.equals(groupZone[i])) {
+                System.out.println("Данный пользователь уже зарегистрирован в одной из групп");
+                return;
+            }
+        }
+
+        if ((zone.equalsIgnoreCase(GYM_ZONE))
+                && (subscription.getAccess() == 1 || subscription.getAccess() == 2 || subscription.getAccess() == 3)
+                && (subscription.getDateOfExpiration().isAfter(CURR_DATE)
+                || subscription.getDateOfExpiration().isEqual(CURR_DATE))
+                && (CURR_TIME.isAfter(subscription.getStartTimeOfVisit())
+                && CURR_TIME.isBefore(subscription.getEndTimeOfVisit()))) {
             addToGymZone(subscription);
-        } else if (zone.equalsIgnoreCase(POOL_ZONE) &&
-                (subscription.getAccess() == 1 || subscription.getAccess() == 3)) {
+        } else if ((zone.equalsIgnoreCase(POOL_ZONE))
+                && (subscription.getAccess() == 1 || subscription.getAccess() == 3)
+                && (subscription.getDateOfExpiration().isAfter(CURR_DATE)
+                || subscription.getDateOfExpiration().isEqual(CURR_DATE))
+                && (CURR_TIME.isAfter(subscription.getStartTimeOfVisit())
+                && CURR_TIME.isBefore(subscription.getEndTimeOfVisit()))) {
             addToPoolZone(subscription);
-        } else if (zone.equalsIgnoreCase(GROUP_ZONE) &&
-                (subscription.getAccess() == 2 || subscription.getAccess() == 3)) {
+        } else if ((zone.equalsIgnoreCase(GROUP_ZONE))
+                && (subscription.getAccess() == 2 || subscription.getAccess() == 3)
+                && (subscription.getDateOfExpiration().isAfter(CURR_DATE))
+                && (CURR_TIME.isAfter(subscription.getStartTimeOfVisit())
+                && CURR_TIME.isBefore(subscription.getEndTimeOfVisit()))) {
             addToGroupZone(subscription);
         } else {
             System.out.println("Введите правильную зону");
