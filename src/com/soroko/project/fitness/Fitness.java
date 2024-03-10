@@ -6,7 +6,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
-
 public class Fitness {
     private final int ZONE_SIZE = 20;
     private final String GYM_ZONE = "тренажерный зал";
@@ -36,6 +35,11 @@ public class Fitness {
     }
 
     private void addToGymZone(Subscription subscription) {
+        if (subscription.getAccess() < 1 || subscription.getAccess() > 3) {
+            System.out.println("Нет доступа к данной группе");
+            return;
+        }
+
         boolean isFull = false;
         for (int i = 0; i < gymZone.length; i++) {
             isFull = true;
@@ -49,7 +53,7 @@ public class Fitness {
                 break;
             }
             try {
-                Thread.sleep(500);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -58,6 +62,10 @@ public class Fitness {
     }
 
     private void addToPoolZone(Subscription subscription) {
+        if (subscription.getAccess() != 1 && subscription.getAccess() != 3) {
+            System.out.println("Нет доступа к данной группе");
+            return;
+        }
         boolean isFull = false;
         for (int i = 0; i < poolZone.length; i++) {
             isFull = true;
@@ -71,7 +79,7 @@ public class Fitness {
                 break;
             }
             try {
-                Thread.sleep(500);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -80,6 +88,10 @@ public class Fitness {
     }
 
     private void addToGroupZone(Subscription subscription) {
+        if (subscription.getAccess() != 2 && subscription.getAccess() != 3) {
+            System.out.println("Нет доступа к данной группе");
+            return;
+        }
         boolean isFull = false;
         for (int i = 0; i < groupZone.length; i++) {
             isFull = true;
@@ -93,7 +105,7 @@ public class Fitness {
                 break;
             }
             try {
-                Thread.sleep(500);
+                Thread.sleep(200);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -110,25 +122,23 @@ public class Fitness {
             }
         }
 
-        if ((zone.equalsIgnoreCase(GYM_ZONE))
-                && (subscription.getAccess() == 1 || subscription.getAccess() == 2 || subscription.getAccess() == 3)
-                && (subscription.getDateOfExpiration().isAfter(CURR_DATE)
-                || subscription.getDateOfExpiration().isEqual(CURR_DATE))
-                && (CURR_TIME.isAfter(subscription.getStartTimeOfVisit())
-                && CURR_TIME.isBefore(subscription.getEndTimeOfVisit()))) {
+        if (subscription.getDateOfExpiration().isBefore(CURR_DATE)
+                && !subscription.getDateOfExpiration().isEqual(CURR_DATE)) {
+            System.out.println("Срок действия абонемента истек");
+            return;
+        }
+
+        if (CURR_TIME.isBefore(subscription.getStartTimeOfVisit())
+                || CURR_TIME.isAfter(subscription.getEndTimeOfVisit())) {
+            System.out.println("Абонемент не активен в данное время суток");
+            return;
+        }
+
+        if ((zone.equalsIgnoreCase(GYM_ZONE))) {
             addToGymZone(subscription);
-        } else if ((zone.equalsIgnoreCase(POOL_ZONE))
-                && (subscription.getAccess() == 1 || subscription.getAccess() == 3)
-                && (subscription.getDateOfExpiration().isAfter(CURR_DATE)
-                || subscription.getDateOfExpiration().isEqual(CURR_DATE))
-                && (CURR_TIME.isAfter(subscription.getStartTimeOfVisit())
-                && CURR_TIME.isBefore(subscription.getEndTimeOfVisit()))) {
+        } else if ((zone.equalsIgnoreCase(POOL_ZONE))) {
             addToPoolZone(subscription);
-        } else if ((zone.equalsIgnoreCase(GROUP_ZONE))
-                && (subscription.getAccess() == 2 || subscription.getAccess() == 3)
-                && (subscription.getDateOfExpiration().isAfter(CURR_DATE))
-                && (CURR_TIME.isAfter(subscription.getStartTimeOfVisit())
-                && CURR_TIME.isBefore(subscription.getEndTimeOfVisit()))) {
+        } else if ((zone.equalsIgnoreCase(GROUP_ZONE))) {
             addToGroupZone(subscription);
         } else {
             System.out.println("Введите правильную зону");
