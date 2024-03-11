@@ -21,10 +21,10 @@ public class King extends Unit {
         boolean FirstKingWon = false;
         int countFirstUnits = 0;
         int countSecondUnits = 0;
-        for (int i = 0; i < armyOfTheKing.length; i++) {
+        for (int i = 0; i < ARMY_SIZE; i++) {
             armyOfTheKing[i].attacks(king.armyOfTheKing[i]);
         }
-        for (int i = 0; i < armyOfTheKing.length; i++) {
+        for (int i = 0; i < ARMY_SIZE; i++) {
             if (armyOfTheKing[i].healthPoint == 0) countFirstUnits++;
             if (king.armyOfTheKing[i].healthPoint == 0) countSecondUnits++;
         }
