@@ -6,8 +6,7 @@ public class Play extends Action {
         System.out.println("play");
     }
 
-    @Override
-    void nextAction() {
-        execute();
+    void nextAction(Action action) {
+        super.nextAction(action);
     }
 }

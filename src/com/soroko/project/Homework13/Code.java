@@ -6,8 +6,7 @@ public class Code extends Action {
         System.out.println("code");
     }
 
-    @Override
-    void nextAction() {
-        execute();
+    void nextAction(Action action) {
+        super.nextAction(action);
     }
 }

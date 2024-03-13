@@ -6,9 +6,7 @@ public class Sleep extends Action {
         System.out.println("sleep");
     }
 
-    @Override
-    void nextAction() {
-        execute();
-        new Code().nextAction();
+    void nextAction(Action action) {
+        super.nextAction(action);
     }
 }

@@ -8,8 +8,7 @@ public class Eat extends Action {
     }
 
     @Override
-    void nextAction() {
-        execute();
-        new Drink().nextAction();
+    void nextAction(Action action) {
+        super.nextAction(action);
     }
 }
