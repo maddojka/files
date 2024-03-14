@@ -3,7 +3,7 @@ package com.soroko.project.Homework13;
 public class Eat extends Action {
 
     @Override
-    void execute() {
+    public void execute() {
         System.out.println("eat");
     }
 

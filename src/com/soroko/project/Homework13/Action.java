@@ -1,17 +1,18 @@
 package com.soroko.project.Homework13;
 
 public abstract class Action {
-    abstract void execute();
+    private Action next;
+    abstract protected void execute();
 
-    void nextAction(Action action) {
+    void nextAction(Action next) {
+        this.next = next;
+    }
+    public void executeNext(Animal animal) {
         execute();
-        if (action instanceof Eat) {
-            new Drink().execute();
-            new Play().execute();
-        }
-        else if (action instanceof Drink) {
-            new Play().execute();
-        }
+        if (next != null) {
+             animal.doAction(next);
+         }
+
     }
 };
 
