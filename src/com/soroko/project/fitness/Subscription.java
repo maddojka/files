@@ -19,7 +19,7 @@ public class Subscription {
             throw new IllegalArgumentException("Данные о посетителе не могут быть пустыми");
         setNumberOfSubscription(numberOfSubscription);
         this.typeOfSubscription = typeOfSubscription;
-        setTypeOfSubscription(String.valueOf(typeOfSubscription));
+        setTypeOfSubscription(typeOfSubscription);
         this.numberOfSubscription = numberOfSubscription;
         this.personData = personData;
         setTimeOfVisit();
@@ -31,7 +31,7 @@ public class Subscription {
             throw new IllegalArgumentException("Данные о посетителе не могут быть пустыми");
         setNumberOfSubscription(numberOfSubscription);
         this.typeOfSubscription = typeOfSubscription;
-        setTypeOfSubscription(String.valueOf(typeOfSubscription));
+        setTypeOfSubscription(typeOfSubscription);
         this.numberOfSubscription = numberOfSubscription;
         this.personData = personData;
         setTimeOfVisit();
@@ -49,9 +49,10 @@ public class Subscription {
         this.numberOfSubscription = numberOfSubscription;
     }
 
-    public void setTypeOfSubscription(String typeOfSubscription) {
-        if ("".equals(typeOfSubscription))
+    public void setTypeOfSubscription(TypeOfSubscription typeOfSubscription) {
+        if (typeOfSubscription == null)
             throw new IllegalArgumentException("Тип абонемента не может быть пустой строкой");
+        this.typeOfSubscription = typeOfSubscription;
     }
 
     public LocalDate getDateOfRegistration() {

@@ -20,13 +20,13 @@ public class PersonData {
 
     public void setName(String name) {
         if ("".equals(name))
-            throw new IllegalArgumentException("Имя не может быть пустой строкой");
+            throw new IllegalArgumentException("РРјСЏ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚РѕР№ СЃС‚СЂРѕРєРѕР№");
         this.name = name;
     }
 
     public void setSurname(String surname) {
         if ("".equals(surname))
-            throw new IllegalArgumentException("Фамилия не может быть пустой строкой");
+            throw new IllegalArgumentException("Р¤Р°РјРёР»РёСЏ РЅРµ РјРѕР¶РµС‚ Р±С‹С‚СЊ РїСѓСЃС‚РѕР№ СЃС‚СЂРѕРєРѕР№");
         this.surname = surname;
     }
 
@@ -40,7 +40,7 @@ public class PersonData {
 
     public void setYear(int year) {
         if (year < 1950 || year > 2010)
-            throw new IllegalArgumentException("Клиент не проходит по возрасту");
+            throw new IllegalArgumentException("РљР»РёРµРЅС‚ РЅРµ РїСЂРѕС…РѕРґРёС‚ РїРѕ РІРѕР·СЂР°СЃС‚Сѓ");
         this.year = year;
     }
 }

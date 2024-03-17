@@ -3,10 +3,10 @@ package com.soroko.project.fitness;
 import java.time.LocalTime;
 
 public enum TypeOfSubscription {
-    ONE_OFF("Разовый", LocalTime.of(8, 0), LocalTime.of(22, 0)),
-    DAY_TIME("Дневной", LocalTime.of(8, 0), LocalTime.of(16, 0)),
-    FULL_TIME("Полный", LocalTime.of(8, 0), LocalTime.of(22, 0)),
-    DEFAULT("Неизвестно", LocalTime.MIN, LocalTime.MIN);
+    ONE_OFF("Р Р°Р·РѕРІС‹Р№", LocalTime.of(8, 0), LocalTime.of(22, 00)),
+    DAY_TIME("Р”РЅРµРІРЅРѕР№", LocalTime.of(8, 0), LocalTime.of(16, 00)),
+    FULL_TIME("РџРѕР»РЅС‹Р№", LocalTime.of(8, 0), LocalTime.of(22, 00)),
+    DEFAULT("РќРµРёР·РІРµСЃС‚РЅРѕ", LocalTime.MIN, LocalTime.MIN);
 
     private String typeOfSubscription;
     private LocalTime startTimeOfVisit;

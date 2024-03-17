@@ -41,92 +41,92 @@ public class Application {
         PersonData person28 = new PersonData("Артур", "Пирожков", 2002);
 
 
-        Subscription firstPerson = new Subscription(1001, person01, ONE_OFF, current);
-        Subscription secondPerson = new Subscription
-                (1002, person02, FULL_TIME, current, LocalDate.of(2025, 3, 10));
-        Subscription thirdPerson = new Subscription
+        Subscription subscriprion01 = new Subscription(1001, person01, ONE_OFF, current);
+        Subscription subscription02 = new Subscription
+                (1002, person02, DAY_TIME, current, LocalDate.of(2025, 3, 10));
+        Subscription subscription03 = new Subscription
                 (1003, person03, FULL_TIME, current, LocalDate.of(2025, 2, 21));
-        Subscription fourthPerson = new Subscription
+        Subscription subscription04 = new Subscription
                 (1004, person04, DAY_TIME, current, LocalDate.of(2025, 3, 10));
-        Subscription fifthPerson = new Subscription
+        Subscription subscription05 = new Subscription
                 (1005, person05, FULL_TIME, current, LocalDate.of(2026, 4, 30));
-        Subscription sixthPerson = new Subscription
+        Subscription subscription06 = new Subscription
                 (1006, person06, FULL_TIME, current, LocalDate.of(2025, 6, 2));
-        Subscription seventhPerson = new Subscription
+        Subscription subscription07 = new Subscription
                 (1007, person07, FULL_TIME, current, LocalDate.of(2027, 1, 9));
-        Subscription eighthPerson = new Subscription
+        Subscription subscription08 = new Subscription
                 (1008, person08, FULL_TIME, current, LocalDate.of(2020, 2, 2));
-        Subscription ninthPerson = new Subscription(1009, person09, ONE_OFF, current);
-        Subscription tenthPerson = new Subscription
+        Subscription subscription09 = new Subscription(1009, person09, ONE_OFF, current);
+        Subscription subscription10 = new Subscription
                 (1010, person10, FULL_TIME, current, LocalDate.of(2025, 8, 31));
-        Subscription eleventhPerson = new Subscription
+        Subscription subscription11 = new Subscription
                 (1011, person11, FULL_TIME, current, LocalDate.of(2019, 4, 5));
-        Subscription twelfthPerson = new Subscription
+        Subscription subscription12 = new Subscription
                 (1012, person12, FULL_TIME, current, LocalDate.of(2025, 10, 11));
-        Subscription thirteenthPerson = new Subscription
+        Subscription subscription13 = new Subscription
                 (1013, person13, FULL_TIME, current, LocalDate.of(2024, 4, 1));
-        Subscription fourteenthPerson = new Subscription
+        Subscription subscription14 = new Subscription
                 (1014, person14, FULL_TIME, current, LocalDate.of(2024, 6, 10));
-        Subscription fifteenthPerson = new Subscription
+        Subscription subscription15 = new Subscription
                 (1015, person15, FULL_TIME, current, LocalDate.of(2024, 12, 29));
-        Subscription sixteenthPerson = new Subscription
+        Subscription subscription16 = new Subscription
                 (1016, person16, FULL_TIME, current, LocalDate.of(2029, 3, 25));
-        Subscription seventeenthPerson = new Subscription(1017, person17, ONE_OFF, current);
-        Subscription eighteenthPerson = new Subscription
+        Subscription subscription17 = new Subscription(1017, person17, ONE_OFF, current);
+        Subscription subscription18 = new Subscription
                 (1018, person18, FULL_TIME, current, LocalDate.of(2025, 11, 11));
-        Subscription nineteenthPerson = new Subscription
+        Subscription subscription19 = new Subscription
                 (1019, person19, FULL_TIME, current, LocalDate.of(2024, 7, 5));
-        Subscription twentiethPerson = new Subscription
+        Subscription subscription20 = new Subscription
                 (1020, person20, FULL_TIME, current, LocalDate.of(2024, 5, 9));
-        Subscription twentyFirstPerson = new Subscription
+        Subscription subscription21 = new Subscription
                 (1021, person21, FULL_TIME, current, LocalDate.of(2023, 2, 15));
-        Subscription twentySecondPerson = new Subscription
+        Subscription subscription22 = new Subscription
                 (1022, person22, FULL_TIME, current, LocalDate.of(2024, 9, 21));
-        Subscription twentyThirdPerson = new Subscription
+        Subscription subscription23 = new Subscription
                 (1023, person23, FULL_TIME, current, LocalDate.of(2025, 3, 10));
-        Subscription twentyFourthPerson = new Subscription
+        Subscription subscription24 = new Subscription
                 (1024, person24, FULL_TIME, current, LocalDate.of(2027, 5, 31));
-        Subscription twentyFifthPerson = new Subscription
+        Subscription subscription25 = new Subscription
                 (1025, person25, FULL_TIME, current, LocalDate.of(2028, 2, 10));
-        Subscription twentySixthPerson = new Subscription
+        Subscription subscription26 = new Subscription
                 (1026, person26, FULL_TIME, current, LocalDate.of(2025, 8, 6));
-        Subscription twentySeventhPerson = new Subscription
+        Subscription subscription27 = new Subscription
                 (1027, person27, FULL_TIME, current, LocalDate.of(2026, 7, 26));
-        Subscription twentyEighthPerson = new Subscription
+        Subscription subscription28 = new Subscription
                 (1028, person28, FULL_TIME, current, LocalDate.of(2024, 4, 12));
         // Filling zones and checking code
-        sportLife.addToDesiredZone("групповые занятия", firstPerson);
-        sportLife.addToDesiredZone("бассейн", firstPerson);
-        sportLife.addToDesiredZone("бассейн", firstPerson);
-        sportLife.addToDesiredZone("групповые занятия", secondPerson);
-        sportLife.addToDesiredZone("тренажерный зал", secondPerson);
-        sportLife.addToDesiredZone("тренажерный зал", thirdPerson);
-        sportLife.addToDesiredZone("бассейн", fourthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", fifthPerson);
-        sportLife.addToDesiredZone("бассейн", fifthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", sixthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", seventhPerson);
-        sportLife.addToDesiredZone("тренажерный зал", eighthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", ninthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", tenthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", eleventhPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twelfthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", thirteenthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", fourteenthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", fifteenthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", sixteenthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", seventeenthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", eighteenthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", nineteenthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twentiethPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twentyFirstPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twentySecondPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twentyThirdPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twentyFourthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twentyFifthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twentySixthPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twentySeventhPerson);
-        sportLife.addToDesiredZone("тренажерный зал", twentyEighthPerson);
+        sportLife.addToDesiredZone("групповые занятия", subscriprion01);
+        sportLife.addToDesiredZone("бассейн", subscriprion01);
+        sportLife.addToDesiredZone("бассейн", subscriprion01);
+        sportLife.addToDesiredZone("бассейн", subscription02);
+        sportLife.addToDesiredZone("групповые занятия", subscription02);
+        sportLife.addToDesiredZone("бассейн", subscription03);
+        sportLife.addToDesiredZone("бассейн", subscription04);
+        sportLife.addToDesiredZone("тренажерный зал", subscription05);
+        sportLife.addToDesiredZone("бассейн", subscription05);
+        sportLife.addToDesiredZone("тренажерный зал", subscription06);
+        sportLife.addToDesiredZone("тренажерный зал", subscription07);
+        sportLife.addToDesiredZone("тренажерный зал", subscription08);
+        sportLife.addToDesiredZone("тренажерный зал", subscription09);
+        sportLife.addToDesiredZone("тренажерный зал", subscription10);
+        sportLife.addToDesiredZone("тренажерный зал", subscription11);
+        sportLife.addToDesiredZone("тренажерный зал", subscription12);
+        sportLife.addToDesiredZone("тренажерный зал", subscription13);
+        sportLife.addToDesiredZone("тренажерный зал", subscription14);
+        sportLife.addToDesiredZone("тренажерный зал", subscription15);
+        sportLife.addToDesiredZone("тренажерный зал", subscription16);
+        sportLife.addToDesiredZone("тренажерный зал", subscription17);
+        sportLife.addToDesiredZone("тренажерный зал", subscription18);
+        sportLife.addToDesiredZone("тренажерный зал", subscription19);
+        sportLife.addToDesiredZone("тренажерный зал", subscription20);
+        sportLife.addToDesiredZone("тренажерный зал", subscription21);
+        sportLife.addToDesiredZone("тренажерный зал", subscription22);
+        sportLife.addToDesiredZone("тренажерный зал", subscription23);
+        sportLife.addToDesiredZone("тренажерный зал", subscription24);
+        sportLife.addToDesiredZone("тренажерный зал", subscription25);
+        sportLife.addToDesiredZone("тренажерный зал", subscription26);
+        sportLife.addToDesiredZone("тренажерный зал", subscription27);
+        sportLife.addToDesiredZone("тренажерный зал", subscription28);
         // printing zones
         sportLife.printGroups();
         // initializing zones
