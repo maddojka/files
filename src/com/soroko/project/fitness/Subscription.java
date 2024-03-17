@@ -13,7 +13,6 @@ public class Subscription {
     private LocalTime endTimeOfVisit;
     private LocalDate dateOfRegistration;
     private LocalDate dateOfExpiration;
-    private int access = 0;
 
     public Subscription(int numberOfSubscription, PersonData personData, TypeOfSubscription typeOfSubscription, LocalDate dateOfRegistration) {
         if (personData == null)
@@ -87,33 +86,21 @@ public class Subscription {
         this.endTimeOfVisit = endTimeOfVisit;
     }
 
-    public int getAccess() {
-        return access;
-    }
-
-    public void setAccess(int access) {
-        this.access = access;
-    }
-
 
     private void setTimeOfVisit() {
         if (this.typeOfSubscription == TypeOfSubscription.ONE_OFF) {
             this.startTimeOfVisit = TypeOfSubscription.ONE_OFF.getStartTimeOfVisit();
             this.endTimeOfVisit = TypeOfSubscription.ONE_OFF.getEndTimeOfVisit();
             this.dateOfExpiration = LocalDate.now();
-            this.access = TypeOfSubscription.ONE_OFF.getAccess();
         } else if (this.typeOfSubscription == TypeOfSubscription.DAY_TIME) {
             this.startTimeOfVisit = TypeOfSubscription.DAY_TIME.getStartTimeOfVisit(); // 8 - 0
             this.endTimeOfVisit = TypeOfSubscription.DAY_TIME.getEndTimeOfVisit();  // 16 - 0
-            this.access = TypeOfSubscription.DAY_TIME.getAccess();
         } else if (this.typeOfSubscription == TypeOfSubscription.FULL_TIME) {
             this.startTimeOfVisit = TypeOfSubscription.FULL_TIME.getStartTimeOfVisit(); // 8 - 0
             this.endTimeOfVisit = TypeOfSubscription.FULL_TIME.getEndTimeOfVisit();  // 22 - 0
-            this.access = TypeOfSubscription.FULL_TIME.getAccess();
         } else {
             this.startTimeOfVisit = LocalTime.of(0, 0);
             this.endTimeOfVisit = LocalTime.of(0, 0);
-            this.access = 0;
         }
     }
 

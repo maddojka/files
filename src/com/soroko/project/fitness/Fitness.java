@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
+import static com.soroko.project.fitness.TypeOfSubscription.*;
+
 public class Fitness {
     private final int ZONE_SIZE = 20;
     private final String GYM_ZONE = "тренажерный зал";
@@ -35,7 +37,8 @@ public class Fitness {
     }
 
     private void addToGymZone(Subscription subscription) {
-        if (subscription.getAccess() < 1 || subscription.getAccess() > 3) {
+        if (subscription.typeOfSubscription != ONE_OFF && subscription.typeOfSubscription != DAY_TIME
+                && subscription.typeOfSubscription != FULL_TIME) {
             System.out.println("Нет доступа к данной группе");
             return;
         }
@@ -53,7 +56,7 @@ public class Fitness {
                 break;
             }
             try {
-                Thread.sleep(200);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -62,7 +65,7 @@ public class Fitness {
     }
 
     private void addToPoolZone(Subscription subscription) {
-        if (subscription.getAccess() != 1 && subscription.getAccess() != 3) {
+        if (subscription.typeOfSubscription != ONE_OFF && subscription.typeOfSubscription != FULL_TIME) {
             System.out.println("Нет доступа к данной группе");
             return;
         }
@@ -79,7 +82,7 @@ public class Fitness {
                 break;
             }
             try {
-                Thread.sleep(200);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -88,7 +91,7 @@ public class Fitness {
     }
 
     private void addToGroupZone(Subscription subscription) {
-        if (subscription.getAccess() != 2 && subscription.getAccess() != 3) {
+        if (subscription.typeOfSubscription != DAY_TIME && subscription.typeOfSubscription != FULL_TIME) {
             System.out.println("Нет доступа к данной группе");
             return;
         }
@@ -105,7 +108,7 @@ public class Fitness {
                 break;
             }
             try {
-                Thread.sleep(200);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
