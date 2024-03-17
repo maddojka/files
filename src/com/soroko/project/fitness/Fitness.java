@@ -46,7 +46,7 @@ public class Fitness {
             if (gymZone[i] == null) {
                 gymZone[i] = subscription;
                 isFull = false;
-                System.out.println(subscription.getSurname() + " " + subscription.getName() + " " + GYM_ZONE);
+                System.out.println(subscription.personData.getSurname() + " " + subscription.personData.getName() + " " + GYM_ZONE);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
                 String text = dtf.format(CURR_DATE_TIME);
                 System.out.println(text);
@@ -72,7 +72,7 @@ public class Fitness {
             if (poolZone[i] == null) {
                 poolZone[i] = subscription;
                 isFull = false;
-                System.out.println(subscription.getSurname() + " " + subscription.getName() + " " + POOL_ZONE);
+                System.out.println(subscription.personData.getSurname() + " " + subscription.personData.getName() + " " + POOL_ZONE);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
                 String text = dtf.format(CURR_DATE_TIME);
                 System.out.println(text);
@@ -98,7 +98,7 @@ public class Fitness {
             if (groupZone[i] == null) {
                 groupZone[i] = subscription;
                 isFull = false;
-                System.out.println(subscription.getSurname() + " " + subscription.getName() + " " + GROUP_ZONE);
+                System.out.println(subscription.personData.getSurname() + " " + subscription.personData.getName() + " " + GROUP_ZONE);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
                 String text = dtf.format(CURR_DATE_TIME);
                 System.out.println(text);
@@ -155,8 +155,9 @@ public class Fitness {
     }
 
     public static void initializeZone(Subscription[] subscriptions) {
+        PersonData defaultPerson = new PersonData("Пользователь", "Неизвестный", 1970);
         Subscription initialSubscription = new Subscription
-                (-1, "просрочен", MIN_DATE, "Пользователь", "Неизвестный", 1970);
+                (-1, defaultPerson, TypeOfSubscription.DEFAULT, LocalDate.MIN, LocalDate.MAX);
         for (int i = 0; i < subscriptions.length; i++) {
             subscriptions[i] = initialSubscription;
         }
