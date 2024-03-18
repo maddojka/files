@@ -18,6 +18,14 @@ public class FruitStorage {
     }
 
     public boolean addToStorage(FruitToStorageInfo toStorageInfo) {
+        for (int i = 0; i < fruits.size(); i++) {
+            if (fruits.get(i) == toStorageInfo) {
+                System.out.println("Данный тип яблок уже существует в хранилище");
+                return false;
+            }
+
+        }
+
         if (toStorageInfo == null || toStorageInfo.getType() == null) {
             System.out.println("Информация о фрукте не может быть null.");
             return false;
@@ -34,16 +42,16 @@ public class FruitStorage {
             return true;
         }
 
-        for (FruitToStorageInfo fruitToStorageInfo : fruits) {
-            if (fruits.contains(toStorageInfo)) {
-                fruitToStorageInfo.setCount(fruitToStorageInfo.getCount() + toStorageInfo.getCount());
+        for (int i = 0; i < fruits.size(); i++) {
+            if (fruits.get(i).equals(toStorageInfo)) {
+                fruits.get(i).setCount(fruits.get(i).getCount() + toStorageInfo.getCount());
                 numberOfSlots -= toStorageInfo.getCount();
                 return true;
             }
         }
 
         for (int i = 0; i < fruits.size(); i++) {
-            if (!fruits.contains(toStorageInfo)) {
+            if (!fruits.get(i).equals(toStorageInfo)) {
                 fruits.add(toStorageInfo);
                 numberOfSlots -= toStorageInfo.getCount();
                 return true;
