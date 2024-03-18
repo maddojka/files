@@ -6,6 +6,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 
+import static com.soroko.project.fitness.TypeOfSubscription.*;
+
 public class Fitness {
     private final int ZONE_SIZE = 20;
     private final String GYM_ZONE = "тренажерный зал";
@@ -21,6 +23,9 @@ public class Fitness {
     private Subscription[] gymZone = new Subscription[ZONE_SIZE];
     private Subscription[] poolZone = new Subscription[ZONE_SIZE];
     private Subscription[] groupZone = new Subscription[ZONE_SIZE];
+    private boolean isGym = false;
+    private boolean isPool = false;
+    private boolean isGroup = false;
 
     public Subscription[] getGymZone() {
         return gymZone;
@@ -34,84 +39,69 @@ public class Fitness {
         return groupZone;
     }
 
-    private void addToGymZone(Subscription subscription) {
-        if (subscription.getAccess() < 1 || subscription.getAccess() > 3) {
-            System.out.println("Нет доступа к данной группе");
+    private void checkIn(Subscription subscription, Subscription[] zone) {
+        String typeOfZone = null;
+        String zoneIsFull = null;
+
+        if (zone == null) {
+            System.out.println("Группа не может быть пустой");
             return;
         }
 
+        if (subscription.typeOfSubscription != FULL_TIME && subscription.typeOfSubscription != DAY_TIME
+                && isGroup) {
+            isGroup = false;
+            System.out.println("Нет доступа к групповым занятиям");
+            return;
+        } else if (subscription.typeOfSubscription != ONE_OFF && subscription.typeOfSubscription != FULL_TIME
+                && isPool) {
+            isPool = false;
+            System.out.println("Нет доступа к бассейну");
+            return;
+        } else if (subscription.typeOfSubscription != FULL_TIME && subscription.typeOfSubscription != DAY_TIME
+                && subscription.typeOfSubscription != ONE_OFF && isGym) {
+            isGym = false;
+            System.out.println("Нет доступа к тренажерному залу");
+            return;
+        }
+
+        if (isGym) {
+            typeOfZone = GYM_ZONE;
+            zoneIsFull = GYM_IS_FULL;
+        } else if (isPool) {
+            typeOfZone = POOL_ZONE;
+            zoneIsFull = POOL_IS_FULL;
+        } else if (isGroup) {
+            typeOfZone = GROUP_ZONE;
+            zoneIsFull = GROUP_IS_FULL;
+        }
+
         boolean isFull = false;
-        for (int i = 0; i < gymZone.length; i++) {
+        for (int i = 0; i < zone.length; i++) {
             isFull = true;
-            if (gymZone[i] == null) {
-                gymZone[i] = subscription;
+            if (zone[i] == null) {
+                zone[i] = subscription;
                 isFull = false;
-                System.out.println(subscription.getSurname() + " " + subscription.getName() + " " + GYM_ZONE);
+                System.out.println(subscription.personData.getSurname() +
+                        " " + subscription.personData.getName() + " " + typeOfZone);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
                 String text = dtf.format(CURR_DATE_TIME);
                 System.out.println(text);
+                isGym = false;
+                isPool = false;
+                isGroup = false;
                 break;
             }
             try {
-                Thread.sleep(200);
+                Thread.sleep(100);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
         }
-        if (gymZone[gymZone.length - 1] != null && isFull) System.out.println(GYM_IS_FULL);
+        if (zone[zone.length - 1] != null && isFull) System.out.println(zoneIsFull);
     }
 
-    private void addToPoolZone(Subscription subscription) {
-        if (subscription.getAccess() != 1 && subscription.getAccess() != 3) {
-            System.out.println("Нет доступа к данной группе");
-            return;
-        }
-        boolean isFull = false;
-        for (int i = 0; i < poolZone.length; i++) {
-            isFull = true;
-            if (poolZone[i] == null) {
-                poolZone[i] = subscription;
-                isFull = false;
-                System.out.println(subscription.getSurname() + " " + subscription.getName() + " " + POOL_ZONE);
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
-                String text = dtf.format(CURR_DATE_TIME);
-                System.out.println(text);
-                break;
-            }
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        if (poolZone[poolZone.length - 1] != null && isFull) System.out.println(POOL_IS_FULL);
-    }
 
-    private void addToGroupZone(Subscription subscription) {
-        if (subscription.getAccess() != 2 && subscription.getAccess() != 3) {
-            System.out.println("Нет доступа к данной группе");
-            return;
-        }
-        boolean isFull = false;
-        for (int i = 0; i < groupZone.length; i++) {
-            isFull = true;
-            if (groupZone[i] == null) {
-                groupZone[i] = subscription;
-                isFull = false;
-                System.out.println(subscription.getSurname() + " " + subscription.getName() + " " + GROUP_ZONE);
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
-                String text = dtf.format(CURR_DATE_TIME);
-                System.out.println(text);
-                break;
-            }
-            try {
-                Thread.sleep(200);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-        }
-        if (groupZone[groupZone.length - 1] != null && isFull) System.out.println(GROUP_IS_FULL);
-    }
 
     public void addToDesiredZone(String zone, Subscription subscription) {
         for (int i = 0; i < ZONE_SIZE; i++) {
@@ -135,11 +125,14 @@ public class Fitness {
         }
 
         if ((zone.equalsIgnoreCase(GYM_ZONE))) {
-            addToGymZone(subscription);
+            isGym = true;
+            checkIn(subscription, getGymZone());
         } else if ((zone.equalsIgnoreCase(POOL_ZONE))) {
-            addToPoolZone(subscription);
+            isPool = true;
+            checkIn(subscription, getPoolZone());
         } else if ((zone.equalsIgnoreCase(GROUP_ZONE))) {
-            addToGroupZone(subscription);
+            isGroup = true;
+            checkIn(subscription, getGroupZone());
         } else {
             System.out.println("Введите правильную зону");
         }
@@ -155,10 +148,9 @@ public class Fitness {
     }
 
     public static void initializeZone(Subscription[] subscriptions) {
+        PersonData defaultPerson = new PersonData("Пользователь", "Неизвестный", 1970);
         Subscription initialSubscription = new Subscription
-                (-1, "просрочен", MIN_DATE, "Пользователь", "Неизвестный", 1970);
-        for (int i = 0; i < subscriptions.length; i++) {
-            subscriptions[i] = initialSubscription;
-        }
+                (-1, defaultPerson, TypeOfSubscription.DEFAULT, MIN_DATE, MIN_DATE);
+        Arrays.fill(subscriptions, initialSubscription);
     }
 }
