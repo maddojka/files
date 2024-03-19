@@ -62,4 +62,6 @@ public class FruitToStorageInfo {
                         ", цена: " + price +
                         ", количество: " + count;
     }
+
+
 }
