@@ -19,7 +19,7 @@ public class FruitStorage {
 
     public boolean addToStorage(FruitToStorageInfo toStorageInfo) {
         for (int i = 0; i < fruits.size(); i++) {
-            if (fruits.get(i) == toStorageInfo) {
+            if (toStorageInfo == fruits.get(i)) {
                 System.out.println("Данный тип яблок уже существует в хранилище");
                 return false;
             }
@@ -128,6 +128,13 @@ public class FruitStorage {
             return 0;
         }
         return min;
+    }
+
+    public <T> List<FruitToStorageInfo>  sortFruits(Comparator<FruitToStorageInfo> T) {
+                 List<FruitToStorageInfo> sortedList = new ArrayList<>();
+                 sortedList = fruits;
+                 sortedList.sort(T);
+                 return sortedList;
     }
 }
 
