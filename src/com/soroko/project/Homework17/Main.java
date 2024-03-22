@@ -69,8 +69,11 @@ public class Main {
         if (text == null) return null;
         Map<Integer, List<String>> result = new HashMap<>();
         String[] words = text.split(" ");
-        for (int i = 0; i < words.length; i++) {
-            result.put(words[i].length(), new ArrayList<>(Arrays.asList(words[i])));
+        for (String string : words) {
+            if (result.containsKey(string.length()))
+                result.get(string.length()).add(string);
+            else
+                result.put(string.length(), new ArrayList<>());
         }
         return result;
     }
@@ -94,8 +97,21 @@ public class Main {
         if (sortedMap.entrySet().size() < 10) n = keyList.size();
         else n = sortedMap.entrySet().size();
         for (int i = 0; i < n; i++) {
-            System.out.println(keyList.get(i) +  " " + valueList.get(i));
+            System.out.println(keyList.get(i) + " " + valueList.get(i));
         }
     }
 
+    public static List<Vehicle> checkWare(Map<String, Integer> map, int levelOfWare) {
+        List<Vehicle> result = new ArrayList<>();
+        return result;
+    }
+
+    public static void coloredVehicles(List<Vehicle> list, Map<Repaintable.Color, List<Vehicle>> map) {
+
+    }
+
+    public static Map<String, Vehicle> repairAll(List<Vehicle> list) {
+        Map<String, Vehicle> result = new HashMap<>();
+        return result;
+    }
 }
