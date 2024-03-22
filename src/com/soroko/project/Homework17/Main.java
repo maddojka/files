@@ -77,12 +77,24 @@ public class Main {
 
     public static void getTopTenWords(String text) {
         String[] words = text.split(" ");
-        Arrays.sort(words);
-        HashSet<String> wordsSet = new HashSet<>(Arrays.asList(words));
-        ArrayList<String> arrayList = new ArrayList<>(wordsSet);
-        String[] array = arrayList.toArray(new String[0]);
-        for (int i = array.length - 10; i < array.length; i++) {
-            System.out.print(words[i] + " ");
+        Map<Integer, String> result = new TreeMap<>();
+        Map<Integer, String> sortedMap;
+        ArrayList<String> list = new ArrayList<>(Arrays.asList(words));
+        for (String string : words) {
+            if (string.length() > 2) {
+                int count = Collections.frequency(list, string);
+                result.put(count, string);
+            }
+        }
+        sortedMap = new TreeMap<>(Comparator.reverseOrder());
+        sortedMap.putAll(result);
+        List<Integer> keyList = new ArrayList<>(sortedMap.keySet());
+        List<String> valueList = new ArrayList<>(sortedMap.values());
+        int n;
+        if (sortedMap.entrySet().size() < 10) n = keyList.size();
+        else n = sortedMap.entrySet().size();
+        for (int i = 0; i < n; i++) {
+            System.out.println(keyList.get(i) +  " " + valueList.get(i));
         }
     }
 
