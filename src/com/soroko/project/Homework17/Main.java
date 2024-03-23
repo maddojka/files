@@ -39,7 +39,45 @@ public class Main {
         }
         System.out.println(result03);
         System.out.println("Топ 10 часто встречаемых слов в тексте: ");
-        getTopTenWords(text);
+        //  getTopTenWords(text);
+
+
+        Car car = new Car(Repaintable.Color.GOLD, "К765СЕ198");
+        car.incLevelOfWare(50);
+        Bus bus = new Bus("М333РП78");
+        bus.incLevelOfWare(20);
+        MiniCar miniCar = new MiniCar(Repaintable.Color.ORANGE, "М432ЕН198");
+        bus.incLevelOfWare(40);
+        Map<String, Vehicle> test = new HashMap<>();
+        test.put(car.getNumber(), car);
+        test.put(bus.getNumber(), bus);
+        test.put(miniCar.getNumber(), miniCar);
+        System.out.println("Поврежденные транспортные средсвта:");
+        List<Vehicle> result = checkLevelOfWare(test, 30);
+        for (Vehicle vehicle : result) {
+            System.out.println(vehicle);
+        }
+        System.out.println("Транспортные средства с требуемым цветом:");
+        List<Repaintable> repaintables = new ArrayList<>() {{
+            add(car);
+            add(miniCar);
+        }};
+        Map<Repaintable.Color, List<Repaintable>> coloredVehicles = new HashMap<>();
+        coloredVehicles.put(Repaintable.Color.GOLD, new ArrayList<>());
+        checkColorOfVehicles(repaintables, coloredVehicles);
+        System.out.println(coloredVehicles);
+
+        Train train = new Train("45B", 8, true);
+        train.breakDown();
+        List<Vehicle> repairables = new ArrayList<>() {{
+            add(bus);
+            add(train);
+        }};
+
+        Map<String, Vehicle> repairedVehicles = repairAllVehicles(repairables);
+        System.out.println("Отремантированные транспортные средства:");
+        System.out.println(repairedVehicles);
+
     }
 
 
@@ -70,48 +108,61 @@ public class Main {
         Map<Integer, List<String>> result = new HashMap<>();
         String[] words = text.split(" ");
         for (String string : words) {
-            if (result.containsKey(string.length()))
-                result.get(string.length()).add(string);
-            else
-                result.put(string.length(), new ArrayList<>());
+            if (string.equalsIgnoreCase(text)) {
+                if (result.containsKey(string.length()))
+                    result.get(string.length()).add(string);
+                else
+                    result.put(string.length(), new ArrayList<>());
+            }
         }
         return result;
     }
 
     public static void getTopTenWords(String text) {
+        if (text == null) return;
+        text = text.toLowerCase().trim();
         String[] words = text.split(" ");
-        Map<Integer, String> result = new TreeMap<>();
-        Map<Integer, String> sortedMap;
-        ArrayList<String> list = new ArrayList<>(Arrays.asList(words));
+        List<String> list = Arrays.asList(words);
+        Map<Integer, List<String>> map = new TreeMap<>();
         for (String string : words) {
             if (string.length() > 2) {
                 int count = Collections.frequency(list, string);
-                result.put(count, string);
+                if (map.get(count) == null)
+                    map.put(count, new ArrayList<>());
+                else map.get(count).add(string);
             }
-        }
-        sortedMap = new TreeMap<>(Comparator.reverseOrder());
-        sortedMap.putAll(result);
-        List<Integer> keyList = new ArrayList<>(sortedMap.keySet());
-        List<String> valueList = new ArrayList<>(sortedMap.values());
-        int n;
-        if (sortedMap.entrySet().size() < 10) n = keyList.size();
-        else n = sortedMap.entrySet().size();
-        for (int i = 0; i < n; i++) {
-            System.out.println(keyList.get(i) + " " + valueList.get(i));
         }
     }
 
-    public static List<Vehicle> checkWare(Map<String, Integer> map, int levelOfWare) {
+
+    public static List<Vehicle> checkLevelOfWare(Map<String, Vehicle> map, int levelOfWare) {
+        if (map == null || levelOfWare <= 0) return null;
         List<Vehicle> result = new ArrayList<>();
+        for (Vehicle value : map.values()) {
+            if (value.getLevelOfWare() > levelOfWare) result.add(value);
+        }
+
         return result;
     }
 
-    public static void coloredVehicles(List<Vehicle> list, Map<Repaintable.Color, List<Vehicle>> map) {
-
+    public static void checkColorOfVehicles(List<Repaintable> list, Map<Repaintable.Color, List<Repaintable>> map) {
+        if (list == null || map == null) return;
+        for (Map.Entry<Repaintable.Color, List<Repaintable>> entry : map.entrySet()) {
+            for (Repaintable repaintable : list) {
+                if (repaintable.getColor() != null && repaintable.getColor().equals(entry.getKey())) {
+                    entry.getValue().add(repaintable);
+                }
+            }
+        }
     }
 
-    public static Map<String, Vehicle> repairAll(List<Vehicle> list) {
+    public static Map<String, Vehicle> repairAllVehicles(List<Vehicle> list) {
+        if (list == null) return null;
         Map<String, Vehicle> result = new HashMap<>();
+        for (Vehicle vehicle : list) {
+            vehicle.repair();
+            result.put(vehicle.getNumber(), vehicle);
+        }
         return result;
     }
 }
