@@ -39,7 +39,7 @@ public class Main {
         }
         System.out.println(result03);
         System.out.println("Топ 10 часто встречаемых слов в тексте: ");
-        //  getTopTenWords(text);
+
 
 
         Car car = new Car(Repaintable.Color.GOLD, "К765СЕ198");
@@ -139,9 +139,9 @@ public class Main {
         if (map == null || levelOfWare <= 0) return null;
         List<Vehicle> result = new ArrayList<>();
         for (Vehicle value : map.values()) {
+            if (value == null) return null;
             if (value.getLevelOfWare() > levelOfWare) result.add(value);
         }
-
         return result;
     }
 
@@ -149,6 +149,7 @@ public class Main {
         if (list == null || map == null) return;
         for (Map.Entry<Repaintable.Color, List<Repaintable>> entry : map.entrySet()) {
             for (Repaintable repaintable : list) {
+                if (repaintable == null) return;
                 if (repaintable.getColor() != null && repaintable.getColor().equals(entry.getKey())) {
                     entry.getValue().add(repaintable);
                 }
@@ -160,6 +161,7 @@ public class Main {
         if (list == null) return null;
         Map<String, Vehicle> result = new HashMap<>();
         for (Vehicle vehicle : list) {
+            if (vehicle == null) return null;
             vehicle.repair();
             result.put(vehicle.getNumber(), vehicle);
         }

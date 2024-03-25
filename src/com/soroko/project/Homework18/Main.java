@@ -2,8 +2,6 @@ package com.soroko.project.Homework18;
 
 import java.time.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
@@ -44,6 +42,7 @@ public class Main {
         // и закрыты (статус CLOSED)
         System.out.println("Задание №1");
         taskList.removeIf(element -> {
+            if (element == null) return false;
             Period period =
                     Period.between(element.getCreatedAt().toLocalDate(), LocalDateTime.now().toLocalDate());
             return element.getStatus() == Task.Status.CLOSED && period.getMonths() > 1;
@@ -56,6 +55,7 @@ public class Main {
         // которые нужно было завершить к текущему моменту
         System.out.println("Задание №2");
         taskList.forEach(element -> {
+                    if (element == null) return;
                     if (element.getStatus() == Task.Status.IN_PROGRESS &&
                             element.getCloseTo().isBefore(LocalDateTime.now()))
                         System.out.println(element);
@@ -68,6 +68,7 @@ public class Main {
         // которые попадают в заданный диапазон дат
         System.out.println("Задание №3");
         taskList.forEach(element -> {
+                    if (element == null) return;
                     LocalDateTime startDateTime = LocalDateTime.of(2023, 11, 1, 10, 0);
                     LocalDateTime endDateTime = LocalDateTime.of(2024, 2, 1, 10, 0);
                     if (element.getCreatedAt().isAfter(startDateTime) && element.getCloseTo().isBefore(endDateTime))
