@@ -1,6 +1,7 @@
 package com.soroko.project.Homework15;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
@@ -108,6 +109,21 @@ public class Main {
         Comparator<FruitToStorageInfo> countAndPriceComparator2 = new CountAndPriceComparator();
         countAndPriceComparatorList2 = fruitsStorage.sortFruits(countAndPriceComparator2);
         for (FruitToStorageInfo fruitToStorageInfo : countAndPriceComparatorList2) {
+            System.out.println(fruitToStorageInfo);
+        }
+
+        // lambda comparing
+        fruitsStorage.getFruits().sort((fruit1, fruit2) -> Integer.compare(fruit2.getCount(), fruit1.getCount()));
+        fruitsStorage.getFruits().sort((fruit1, fruit2) -> Double.compare(fruit1.getPrice(), fruit2.getPrice()));
+        fruitsStorage.getFruits().sort((fruit1, fruit2) -> fruit1.getType().compareTo(fruit2.getType()));
+        fruitsStorage.getFruits().sort((fruit1, fruit2) -> {
+            if (fruit1.getCount() != fruit2.getCount())
+                return Integer.compare(fruit1.getCount(), fruit2.getCount());
+            else
+                return Double.compare(fruit2.getPrice(), fruit1.getPrice());
+        });
+        System.out.println("Сортировка с помощью лямбда выражений:");
+        for (FruitToStorageInfo fruitToStorageInfo : fruitsStorage.getFruits()) {
             System.out.println(fruitToStorageInfo);
         }
     }
