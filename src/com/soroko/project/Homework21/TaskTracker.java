@@ -91,10 +91,18 @@ public class TaskTracker {
     public TasksTrackerStatistic getStatistics() {
         // реализовать метод, используя collectors api
         // посмотрите методы teeing() и reducing()
-        TasksTrackerStatistic tasksTrackerStatistic = tasks.stream().collect(Collectors.teeing(
-                Collectors.mapping()
-        ));
-        return tasksTrackerStatistic;
+        return tasks.stream()
+                .collect(Collectors.teeing(
+                        filtering(taskToParticipant -> taskToParticipant.getTask().getStatus().orElseThrow() == CLOSED,
+                                Collectors.counting()),
+                        mapping(TaskToParticipant::getParticipant, Collectors.counting()),
+                        filtering(taskToParticipant -> taskToParticipant.getTask().getCloseTo().orElseThrow().isBefore(LocalDateTime.now())
+                                        && taskToParticipant.getTask().getStatus().orElseThrow() != CLOSED,
+                                Collectors.counting()),
+                        filtering(taskToParticipant -> taskToParticipant.getTask().getStatus().orElseThrow() == IN_PROGRESS,
+                                Collectors.counting()),
+                        TaskToParticipant::new
+                ));
     }
 
     // возвращает Map,
@@ -120,8 +128,6 @@ public class TaskTracker {
                 .collect(Collectors.groupingBy(Collectors.groupingBy(taskToParticipant -> taskToParticipant.getTask().getPriority().orElse(null),
                         Collectors.mapping(taskToParticipant -> taskToParticipant.getTask().getId()))));
     }
-    /*Map<String, Map<BlogPostType, List>> map = posts.stream()
-            .collect(groupingBy(BlogPost::getAuthor, groupingBy(BlogPost::getType)));*/
 
     // возвращает неизменяемый список задач, прошедших проверку predicate
     public List<Task> filteredTasks(TaskPredicate predicate) {
