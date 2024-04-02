@@ -7,16 +7,12 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.soroko.project.Homework21.Task.Status.*;
-import static java.util.stream.Collectors.filtering;
+import static java.util.stream.Collectors.*;
 
 
 public class TaskTracker {
     private String name;
     private Set<TaskToParticipant> tasks = new HashSet<>();
-
-    public Set<TaskToParticipant> getTasks() {
-        return tasks;
-    }
 
     // taskPredicates - условия добавления задач. Тип данных определить самостоятельно +
     // условие добавление задачи по умолчанию: задача должна быть открытой +
@@ -128,11 +124,11 @@ public class TaskTracker {
     // значения - все его открытые задачи
     public Map<Integer, List<Task>> groupTasksByParticipantId() {
         return tasks.stream()
-                .collect(Collectors.groupingBy(taskToParticipant -> taskToParticipant.getParticipant().getId(),
+                .collect(groupingBy(taskToParticipant -> taskToParticipant.getParticipant().getId(),
                         filtering(taskToParticipant -> taskToParticipant.getTask().getStatus().isPresent()
                                         && (taskToParticipant.getTask().getStatus().get() == NEW ||
                                         taskToParticipant.getTask().getStatus().get() == IN_PROGRESS),
-                                Collectors.mapping(TaskToParticipant::getTask, Collectors.toList()))));
+                                mapping(TaskToParticipant::getTask, Collectors.toList()))));
     }
 
     // возвращает Map,
@@ -140,12 +136,12 @@ public class TaskTracker {
     // значения - Map,
     //      где ключи - статусы задач,
     //      значения - списки идентификаторов задач
-
     public Map<Task.Status, Map<Task.Priority, List<Integer>>> groupTasksIdByStatusAndPriority() {
-        /*return tasks.stream()
-                .collect(Collectors.groupingBy(Collectors.groupingBy(taskToParticipant -> taskToParticipant.getTask().getPriority().orElse(null),
-                        Collectors.mapping(taskToParticipant -> taskToParticipant.getTask().getId()))));*/
-        return null;
+        return tasks.stream()
+                .map(TaskToParticipant::getTask)
+                .collect(groupingBy(task -> task.getStatus().orElseThrow(),
+                        groupingBy(task -> task.getPriority().orElse(null),
+                                mapping(Task::getId, toList()))));
     }
 
     // возвращает неизменяемый список задач, прошедших проверку predicate
