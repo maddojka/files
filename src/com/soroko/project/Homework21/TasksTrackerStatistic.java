@@ -39,5 +39,12 @@ public class TasksTrackerStatistic {
         this.numberOfInProgress = numberOfInProgress;
     }
 
-
+    @Override
+    public String toString() {
+        return "TasksTrackerStatistic - " +
+                "numberOfClosed: " + numberOfClosed +
+                ", numberOfParticipants: " + numberOfParticipants +
+                ", numberOfFailed: " + numberOfFailed +
+                ", numberOfInProgress: " + numberOfInProgress;
+    }
 }

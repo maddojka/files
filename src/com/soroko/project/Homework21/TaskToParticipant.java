@@ -10,6 +10,12 @@ public class TaskToParticipant {
     // геттеры и сеттеры
 
 
+    public TaskToParticipant(Participant participant, Task task, int progress) {
+        this.participant = participant;
+        this.task = task;
+        this.progress = progress;
+    }
+
     public Participant getParticipant() {
         return participant;
     }
@@ -36,7 +42,7 @@ public class TaskToParticipant {
 
     @Override
     public String toString() {
-        return "TaskToParticipant " +
+        return "TaskToParticipant - " +
                 "participant: " + participant +
                 ", task: " + task +
                 ", progress: " + progress;

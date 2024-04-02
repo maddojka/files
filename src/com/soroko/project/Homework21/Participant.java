@@ -73,7 +73,7 @@ public class Participant {
 
     @Override
     public String toString() {
-        return "Participant: " +
+        return "Participant - " +
                 "id: " + id +
                 ", name: " + name +
                 ", active: " + active +

@@ -1,30 +1,37 @@
 package com.soroko.project.Homework21;
 
 
+import java.time.LocalDateTime;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import static com.soroko.project.Homework21.Task.Status.*;
-import static java.util.stream.Collectors.*;
+import static java.util.stream.Collectors.filtering;
+
 
 public class TaskTracker {
     private String name;
-    private Set<TaskToParticipant> tasks;
+    private Set<TaskToParticipant> tasks = new HashSet<>();
+
+    public Set<TaskToParticipant> getTasks() {
+        return tasks;
+    }
 
     // taskPredicates - условия добавления задач. Тип данных определить самостоятельно +
     // условие добавление задачи по умолчанию: задача должна быть открытой +
     // может быть заменено методом taskSettings +
-    private TaskPredicate taskPredicates = task -> task.getStatus().isPresent()
+    private Predicate<Task> taskPredicates = task -> task.getStatus().isPresent()
             && (task.getStatus().get() == IN_PROGRESS
             || task.getStatus().get() == NEW);
-    private final TaskPredicate initialTaskPredicate = taskPredicates;
+    private final Predicate<Task> initialTaskPredicate = taskPredicates;
     // participantPredicates - условия добавления исполнителей. Тип данных определить самостоятельно +
     // условие добавление исполнителя по умолчанию: исполнитель должен быть +
     // доступен по свойству active +
     // может быть заменено методом participantSettings +
-    private ParticipantPredicate participantPredicates = participant -> participant.isActive();
+    private Predicate<Participant> participantPredicates = Participant::isActive;
 
-    private ParticipantPredicate initialParticipantPredicates = participantPredicates;
+    private Predicate<Participant> initialParticipantPredicates = participantPredicates;
 
     private TaskTracker(String name) {
         if ("".equals(name)) throw new IllegalArgumentException("Имя трекера не может быть пустой строкой");
@@ -41,7 +48,7 @@ public class TaskTracker {
 
     // TaskPredicate - функциональный интерфейс +
     // его абстрактный метод принимает задачу, возвращает ture или false +
-    public TaskTracker taskSettings(int index, TaskPredicate... predicates) {
+    public TaskTracker taskSettings(Predicate<Task> predicates) {
 
         // predicates - массив типа TaskPredicate -
         // условия добавления задач, +
@@ -50,17 +57,14 @@ public class TaskTracker {
         //                      - задача должна быть просроченной +
         // все условия хранятся в TaskPredicate +
         Objects.requireNonNull(predicates);
-        if (index > predicates.length) index = predicates.length - 1;
-        if (index < 0) this.taskPredicates = initialTaskPredicate;
-        else
-            this.taskPredicates = predicates[index];
+        this.taskPredicates = predicates;
         return this;
     }
 
 
     // ParticipantPredicate - функциональный интерфейс +
     // его абстрактный метод принимает задачу, возвращает ture или false +
-    public TaskTracker participantSettings(int index, ParticipantPredicate... predicates) {
+    public TaskTracker participantSettings(Predicate<Participant> predicates) {
         // predicates - массив типа ParticipantPredicate - +
         // условия добавления исполнителей
         // например, predicates - опыт работы выше 5
@@ -68,10 +72,7 @@ public class TaskTracker {
         //                      - у исполнителя еще нет задач
         // все условия хранятся в participantPredicates +
         Objects.requireNonNull(predicates);
-        if (index > predicates.length) index = predicates.length - 1;
-        if (index < 0) this.participantPredicates = initialParticipantPredicates;
-        else
-            this.participantPredicates = predicates[index];
+        this.participantPredicates = predicates;
         return this;
     }
 
@@ -81,8 +82,8 @@ public class TaskTracker {
         // создается TaskToParticipant, если задача (task) и исполнитель (participant)
         // удовлетворяют требованиям taskPredicates и participantPredicates
         // TaskToParticipant добавляется в tasks +
-        if (taskPredicates.applyTask(task) && participantPredicates.applyParticipant(participant)) {
-            tasks.add(new TaskToParticipant());
+        if (taskPredicates.test(task) && participantPredicates.test(participant)) {
+            tasks.add(new TaskToParticipant(participant, task, 0));
         }
         return this;
     }
@@ -91,18 +92,35 @@ public class TaskTracker {
     public TasksTrackerStatistic getStatistics() {
         // реализовать метод, используя collectors api
         // посмотрите методы teeing() и reducing()
-        return tasks.stream()
-                .collect(Collectors.teeing(
-                        filtering(taskToParticipant -> taskToParticipant.getTask().getStatus().orElseThrow() == CLOSED,
-                                Collectors.counting()),
-                        mapping(TaskToParticipant::getParticipant, Collectors.counting()),
-                        filtering(taskToParticipant -> taskToParticipant.getTask().getCloseTo().orElseThrow().isBefore(LocalDateTime.now())
-                                        && taskToParticipant.getTask().getStatus().orElseThrow() != CLOSED,
-                                Collectors.counting()),
-                        filtering(taskToParticipant -> taskToParticipant.getTask().getStatus().orElseThrow() == IN_PROGRESS,
-                                Collectors.counting()),
-                        TaskToParticipant::new
-                ));
+        long numberOfClosed = 0L;
+        long numberOfParticipants = 0L;
+        long numberOfFailed = 0L;
+        long numberOfInProgress = 0L;
+
+        if (tasks != null) {
+            numberOfClosed = tasks.stream()
+                    .collect(filtering(taskToParticipant -> taskToParticipant.getTask().getStatus().orElseThrow() == CLOSED,
+                            Collectors.counting()));
+            numberOfParticipants = tasks.stream()
+                    .map(TaskToParticipant::getParticipant)
+                    .collect(Collectors.counting());
+            numberOfFailed = tasks.stream()
+                    .map(TaskToParticipant::getTask)
+                    .collect(filtering(task -> task.getCloseTo().orElseThrow().isBefore(LocalDateTime.now())
+                                    && task.getStatus().orElseThrow() != CLOSED,
+                            Collectors.counting()));
+            numberOfInProgress = tasks.stream()
+                    .map(TaskToParticipant::getTask)
+                    .collect(filtering(task -> task.getStatus().orElseThrow() == IN_PROGRESS,
+                            Collectors.counting()));
+            TasksTrackerStatistic tasksTrackerStatistic = new TasksTrackerStatistic();
+            tasksTrackerStatistic.setNumberOfClosed((int) numberOfClosed);
+            tasksTrackerStatistic.setNumberOfParticipants((int) numberOfParticipants);
+            tasksTrackerStatistic.setNumberOfFailed((int) numberOfFailed);
+            tasksTrackerStatistic.setNumberOfInProgress((int) numberOfInProgress);
+            return tasksTrackerStatistic;
+        }
+        return null;
     }
 
     // возвращает Map,
@@ -111,7 +129,7 @@ public class TaskTracker {
     public Map<Integer, List<Task>> groupTasksByParticipantId() {
         return tasks.stream()
                 .collect(Collectors.groupingBy(taskToParticipant -> taskToParticipant.getParticipant().getId(),
-                        Collectors.filtering(taskToParticipant -> taskToParticipant.getTask().getStatus().isPresent()
+                        filtering(taskToParticipant -> taskToParticipant.getTask().getStatus().isPresent()
                                         && (taskToParticipant.getTask().getStatus().get() == NEW ||
                                         taskToParticipant.getTask().getStatus().get() == IN_PROGRESS),
                                 Collectors.mapping(TaskToParticipant::getTask, Collectors.toList()))));
@@ -124,9 +142,10 @@ public class TaskTracker {
     //      значения - списки идентификаторов задач
 
     public Map<Task.Status, Map<Task.Priority, List<Integer>>> groupTasksIdByStatusAndPriority() {
-        return tasks.stream()
+        /*return tasks.stream()
                 .collect(Collectors.groupingBy(Collectors.groupingBy(taskToParticipant -> taskToParticipant.getTask().getPriority().orElse(null),
-                        Collectors.mapping(taskToParticipant -> taskToParticipant.getTask().getId()))));
+                        Collectors.mapping(taskToParticipant -> taskToParticipant.getTask().getId()))));*/
+        return null;
     }
 
     // возвращает неизменяемый список задач, прошедших проверку predicate
@@ -134,7 +153,7 @@ public class TaskTracker {
         Objects.requireNonNull(predicate);
         return tasks.stream()
                 .map(TaskToParticipant::getTask)
-                .filter(task -> taskPredicates.applyTask(task))
+                .filter(predicate)
                 .toList();
     }
 }

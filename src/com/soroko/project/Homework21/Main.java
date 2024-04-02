@@ -1,6 +1,11 @@
 package com.soroko.project.Homework21;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 import static com.soroko.project.Homework21.Task.Priority.*;
 import static com.soroko.project.Homework21.Task.Status.*;
@@ -27,15 +32,29 @@ public class Main {
                 && task.getPriority().isPresent()
                 && (task.getStatus().get() == IN_PROGRESS || task.getStatus().get() == NEW)
                 && task.getPriority().get() == URGENT;
-        TaskPredicate predicateTwo = task -> task.getStatus().isPresent()
+        TaskPredicate taskPredicateTwo = task -> task.getStatus().isPresent()
                 && task.getPriority().isPresent()
                 && (task.getStatus().get() == CLOSED)
                 && task.getPriority().get() == HIGH;
-        TaskPredicate[] taskPredicates = {taskPredicateOne, predicateTwo};
-        ParticipantPredicate participantPredicateOne = participant -> participant.getExperience() > 5;
-        ParticipantPredicate participantPredicateTwo = participant -> participant.getMaxTasks() < 10;
-        ParticipantPredicate[] participantPredicates = {participantPredicateOne, participantPredicateTwo};
-        taskTracker.taskSettings(-1, taskPredicates);
-        taskTracker.participantSettings(-1, participantPredicates);
+        Predicate<Task> taskPredicates = taskPredicateOne.or(taskPredicateTwo);
+        ParticipantPredicate participantPredicateOne = participant -> participant.getExperience() > 1;
+        ParticipantPredicate participantPredicateTwo = participant -> participant.getMaxTasks() < 20;
+        Predicate<Participant> participantPredicates = participantPredicateOne.or(participantPredicateTwo);
+        taskTracker.taskSettings(taskPredicates);
+        taskTracker.participantSettings(participantPredicates);
+        taskTracker.add(task01, participant01);
+        taskTracker.add(task02, participant02);
+        taskTracker.add(task03, participant03);
+        taskTracker.add(task04, participant03);
+        TasksTrackerStatistic tasksTrackerStatistic = taskTracker.getStatistics();
+        System.out.println(tasksTrackerStatistic);
+        System.out.println(taskTracker.getTasks());
+        List<Task> filteredTasks = new ArrayList<>();
+        filteredTasks = taskTracker.filteredTasks(task -> task.getStatus().orElseThrow() == CLOSED);
+        for (Task filteredTask : filteredTasks) {
+            System.out.println(filteredTask);
+            Map<Task.Status, Map<Task.Priority, List<Integer>>> groupOfTasks = new HashMap<>();
+            groupOfTasks = taskTracker.groupTasksIdByStatusAndPriority();
+        }
     }
 }

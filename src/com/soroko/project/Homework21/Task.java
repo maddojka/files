@@ -21,6 +21,7 @@ public class Task {
         this.id = id;
         this.title = title;
         this.status = status;
+        this.priority = priority;
         this.createdAt = createdAt;
         this.closeTo = closeTo;
     }
@@ -79,7 +80,7 @@ public class Task {
 
     @Override
     public String toString() {
-        return "Task " +
+        return "Task - " +
                 "id: " + id +
                 ", title: " + title + '\'' +
                 ", status: " + status +
