@@ -21,13 +21,11 @@ public class Sensor {
 
     public void temperatureRequest() {
         double temp = Math.random() * 1000;
-        if (temp != this.temperature)
+        if (temp != temperature)
             reactionables.forEach(reactionable -> {
                 reactionable.react(temp);
                 reactionable.log();
             });
-        this.temperature = temp;
-
     }
 
     public String getTypeOfSensor() {
