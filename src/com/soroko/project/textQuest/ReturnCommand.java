@@ -1,14 +1,14 @@
 package com.soroko.project.textQuest;
 
-public class ReturnCommand implements Command{
-    Return returnToGame;
+public class ReturnCommand implements Command {
+    Menu menu;
 
-    public ReturnCommand(Return returnToGame) {
-        this.returnToGame = returnToGame;
+    public ReturnCommand(Menu menu) {
+        this.menu = menu;
     }
 
     @Override
     public void execute() {
-        returnToGame.activate();
+        menu.returnGame();
     }
 }

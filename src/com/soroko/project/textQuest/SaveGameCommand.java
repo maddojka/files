@@ -1,14 +1,14 @@
 package com.soroko.project.textQuest;
 
 public class SaveGameCommand implements Command{
-    SaveGame saveGame;
+    Menu menu;
 
-    public SaveGameCommand(SaveGame saveGame) {
-        this.saveGame = saveGame;
+    public SaveGameCommand(Menu menu) {
+        this.menu = menu;
     }
 
     @Override
     public void execute() {
-        saveGame.activate();
+        menu.saveGame();
     }
 }

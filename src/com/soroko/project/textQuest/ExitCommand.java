@@ -1,14 +1,14 @@
 package com.soroko.project.textQuest;
 
 public class ExitCommand implements Command{
-    Exit exit;
+    Menu menu;
 
-    public ExitCommand(Exit exit) {
-        this.exit = exit;
+    public ExitCommand(Menu menu) {
+        this.menu = menu;
     }
 
     @Override
     public void execute() {
-        exit.activate();
+        menu.exitGame();
     }
 }

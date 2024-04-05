@@ -1,14 +1,14 @@
 package com.soroko.project.textQuest;
 
 public class StartGameCommand implements Command{
-    StartGame startGame;
+    Menu menu;
 
-    public StartGameCommand(StartGame startGame) {
-        this.startGame = startGame;
+    public StartGameCommand(Menu menu) {
+        this.menu = menu;
     }
 
     @Override
     public void execute() {
-        startGame.activate();
+        menu.startGame();
     }
 }
