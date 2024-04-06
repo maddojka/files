@@ -7,10 +7,8 @@ import java.util.Objects;
 public class Subscription {
 
     private int numberOfSubscription;
-    TypeOfSubscription typeOfSubscription;
-    PersonData personData;
-    private LocalTime startTimeOfVisit;
-    private LocalTime endTimeOfVisit;
+    private TypeOfSubscription typeOfSubscription;
+    private PersonData personData;
     private LocalDate dateOfRegistration;
     private LocalDate dateOfExpiration;
 
@@ -71,37 +69,17 @@ public class Subscription {
         this.dateOfExpiration = dateOfExpiration;
     }
 
-    public LocalTime getStartTimeOfVisit() {
-        return startTimeOfVisit;
+    public TypeOfSubscription getTypeOfSubscription() {
+        return typeOfSubscription;
     }
 
-    public LocalTime getEndTimeOfVisit() {
-        return endTimeOfVisit;
+    public PersonData getPersonData() {
+        return personData;
     }
-
-    public void setStartTimeOfVisit() {
-        this.startTimeOfVisit = startTimeOfVisit;
-    }
-
-    public void setEndTimeOfVisit(LocalTime endTimeOfVisit) {
-        this.endTimeOfVisit = endTimeOfVisit;
-    }
-
 
     private void setTimeOfVisit() {
         if (this.typeOfSubscription == TypeOfSubscription.ONE_OFF) {
-            this.startTimeOfVisit = TypeOfSubscription.ONE_OFF.getStartTimeOfVisit();
-            this.endTimeOfVisit = TypeOfSubscription.ONE_OFF.getEndTimeOfVisit();
             this.dateOfExpiration = LocalDate.now();
-        } else if (this.typeOfSubscription == TypeOfSubscription.DAY_TIME) {
-            this.startTimeOfVisit = TypeOfSubscription.DAY_TIME.getStartTimeOfVisit(); // 8 - 0
-            this.endTimeOfVisit = TypeOfSubscription.DAY_TIME.getEndTimeOfVisit();  // 16 - 0
-        } else if (this.typeOfSubscription == TypeOfSubscription.FULL_TIME) {
-            this.startTimeOfVisit = TypeOfSubscription.FULL_TIME.getStartTimeOfVisit(); // 8 - 0
-            this.endTimeOfVisit = TypeOfSubscription.FULL_TIME.getEndTimeOfVisit();  // 22 - 0
-        } else {
-            this.startTimeOfVisit = LocalTime.of(0, 0);
-            this.endTimeOfVisit = LocalTime.of(0, 0);
         }
     }
 
@@ -113,8 +91,8 @@ public class Subscription {
                 ", Имя: " + personData.getName() +
                 ", Фамилия: " + personData.getSurname() +
                 ", год: " + personData.getYear() +
-                ", время посещения: " + startTimeOfVisit +
-                "-" + endTimeOfVisit;
+                ", время посещения: " + typeOfSubscription.getStartTimeOfVisit() +
+                "-" + typeOfSubscription.getEndTimeOfVisit();
     }
 
     @Override

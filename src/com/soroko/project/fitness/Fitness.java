@@ -48,18 +48,18 @@ public class Fitness {
             return;
         }
 
-        if (subscription.typeOfSubscription != FULL_TIME && subscription.typeOfSubscription != DAY_TIME
+        if (subscription.getTypeOfSubscription() != FULL_TIME && subscription.getTypeOfSubscription() != DAY_TIME
                 && isGroup) {
             isGroup = false;
             System.out.println("Нет доступа к групповым занятиям");
             return;
-        } else if (subscription.typeOfSubscription != ONE_OFF && subscription.typeOfSubscription != FULL_TIME
+        } else if (subscription.getTypeOfSubscription() != ONE_OFF && subscription.getTypeOfSubscription() != FULL_TIME
                 && isPool) {
             isPool = false;
             System.out.println("Нет доступа к бассейну");
             return;
-        } else if (subscription.typeOfSubscription != FULL_TIME && subscription.typeOfSubscription != DAY_TIME
-                && subscription.typeOfSubscription != ONE_OFF && isGym) {
+        } else if (subscription.getTypeOfSubscription() != FULL_TIME && subscription.getTypeOfSubscription() != DAY_TIME
+                && subscription.getTypeOfSubscription() != ONE_OFF && isGym) {
             isGym = false;
             System.out.println("Нет доступа к тренажерному залу");
             return;
@@ -82,8 +82,8 @@ public class Fitness {
             if (zone[i] == null) {
                 zone[i] = subscription;
                 isFull = false;
-                System.out.println(subscription.personData.getSurname() +
-                        " " + subscription.personData.getName() + " " + typeOfZone);
+                System.out.println(subscription.getPersonData().getSurname() +
+                        " " + subscription.getPersonData().getName() + " " + typeOfZone);
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd:MM:yyyy H:mm:ss");
                 String text = dtf.format(CURR_DATE_TIME);
                 System.out.println(text);
@@ -102,7 +102,6 @@ public class Fitness {
     }
 
 
-
     public void addToDesiredZone(String zone, Subscription subscription) {
         for (int i = 0; i < ZONE_SIZE; i++) {
             if (subscription.equals(gymZone[i])
@@ -118,8 +117,8 @@ public class Fitness {
             return;
         }
 
-        if (CURR_TIME.isBefore(subscription.getStartTimeOfVisit())
-                || CURR_TIME.isAfter(subscription.getEndTimeOfVisit())) {
+        if (CURR_TIME.isBefore(subscription.getTypeOfSubscription().getStartTimeOfVisit())
+                || CURR_TIME.isAfter(subscription.getTypeOfSubscription().getEndTimeOfVisit())) {
             System.out.println("Абонемент не активен в данное время суток");
             return;
         }
