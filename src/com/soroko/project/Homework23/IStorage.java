@@ -1,8 +1,6 @@
-package Homework23;
+package com.soroko.project.Homework23;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 // единый интерфейс хранения данных
 // T - тип хранимого объекта

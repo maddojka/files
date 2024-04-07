@@ -1,14 +1,15 @@
 package com.soroko.project.textQuest;
 
-public class SaveGameCommand extends Command {
+public class ExitGameCommand extends Command {
 
-    public SaveGameCommand(String code) {
+
+    public ExitGameCommand(String code) {
         super(code);
 
     }
 
     @Override
     public void execute(Menu menu) {
-        menu.saveGame();
+        menu.exitGame();
     }
 }

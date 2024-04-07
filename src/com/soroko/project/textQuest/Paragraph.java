@@ -1,60 +1,72 @@
 package com.soroko.project.textQuest;
 
-public class Paragraph {
+public enum Paragraph {
 
-    String comeBackHome = "Вернувшись домой, Лисёнок нашёл там Бельчонка. " +
-            "Оказалось, что Бельчонок пришёл на место встречи раньше и увидел там рой злобных пчел. " +
-            "Он поспешил предупредить об этом Лисёнка, но они разминулись. Наконец-то друзья нашли друг друга! " +
-            "Игра завершилась успехом";
+    FirstParagraph {
+        @Override
+        public Paragraph firstState() {
+            return SecondParagraph;
+        }
 
+        @Override
+        public Paragraph secondState() {
+            return FirstParagraph;
+        }
 
-    String tryToSearch = "Все лесные жители были заняты своими делами" +
-            " и не обращали внимания на Лисёнка и его проблему. " +
-            "Но вдруг кто нибудь видел Бельчонка... Лисёнок не знал, что ему делать. Помогите ему.";
+        @Override
+        public String textOfParagraph() {
+            return "TextQuest.FIRST_PARAGRAPH";
+        }
+    },
+    SecondParagraph {
+        @Override
+        public Paragraph firstState() {
+            return ThirdParagraph;
+        }
 
+        @Override
+        public Paragraph secondState() {
+            return this;
+        }
 
-    String tryToAskForestDwellers = "Пока Лисёнок принимал решение, лесные жители разошлись кто куда. " +
-            "Остались только Сова и Волк. " +
-            "Но у Совы бывают проблемы с памятью, а Волк может сильно разозлиться из-за расспросов. Кого выбрать?";
+        @Override
+        public String textOfParagraph() {
+            return TextQuest.SECOND_PARAGRAPH;
+        }
+    },
+    ThirdParagraph {
+        @Override
+        public Paragraph firstState() {
+            return this;
+        }
 
+        @Override
+        public Paragraph secondState() {
+            return this;
+        }
 
-    String tryToSearchSquirrelAlone =
-            "Лисёнок слишком долго плутал по лесу в поисках друга и сам не заметил, как заблудился. " +
-                    "Теперь его самого нужно искать. Игра завершилась неудачей";
+        @Override
+        public String textOfParagraph() {
+            return TextQuest.THIRD_PARAGRAPH;
+        }
+    },
+    FinalParagraph {
+        @Override
+        public Paragraph firstState() {
+            return this;
+        }
 
-    String askTheOwl =
-            "Сова долго не хотела говорить, но в итоге сказала, что видела испуганного Бельчонка," +
-                    " бежавшего вглубь леса. " +
-                    "Все лесные жители знают, что в глубине леса опасно, если Бельчонок там, ему срочно нужна помощь.";
+        @Override
+        public Paragraph secondState() {
+            return this;
+        }
 
-    String askTheWolf =
-            "Волк оказался вполне дружелюбным, но помочь не смог. " +
-                    "Лишь сказал, что маленькому лисенку не стоит бродить по лесу одному. И как теперь поступить?";
-
-    String goDeepIntoTheForest =
-            "В глубине леса Лисёнок встретил Медвежонка. " +
-                    "Ленивый Медвежонок был готов рассказать все, что знает, если Лисёнок принесёт ему мёда.";
-
-    String tryToFindTheHoney =
-            "Лисёнок быстро нашёл мёд, но вокруг летал рой злобных пчел. " +
-                    "Лисёнок всегда боялся пчёл, но и не найти друга он тоже боялся.";
-
-    String waitForTheBeesToFlyAway = "Лисёнок подождал немного, и пчёлы разлетелись. " +
-            "Лисёнок без проблем набрал мёда. Вдруг он понял, что очень голоден. Что же делать?";
-
-
-    String stealHoneyImmediately =
-            "Это была не лучшая идея. Пчёлы покусали Лисёнка, теперь ему самому нужна помощь. " +
-                    "Игра завершилась неудачей";
-
-    String eatAndRest =
-            "Пока Лисёнок ел, злобные пчёлы вернулись и покусали его. " +
-                    "Лисёнку нужна помощь, он не сможет продолжить поиски. Игра завершилась неудачей";
-
-    String carryHoneyToTheBear =
-            "Довольный Медвежонок рассказал Лисёнку, что очень хорошо знает семью Белок и уверен," +
-                    " что Бельчонок никогда не пошёл бы в глубь леса. " +
-                    "Он заверял Лисёнка, что Белки не попадают в неприятности," +
-                    " и что Совам нельзя верить, он также уговаривал Лисёнка вернуться домой.";
+        @Override
+        public String textOfParagraph() {
+            return TextQuest.FINAL_PARAGRAPH;
+        }
+    };
+    public abstract Paragraph firstState();
+    public abstract Paragraph secondState();
+    public abstract String textOfParagraph();
 }
-

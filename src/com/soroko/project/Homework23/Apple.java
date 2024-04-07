@@ -1,4 +1,4 @@
-package Homework23;
+package com.soroko.project.Homework23;
 
 public record Apple(
         long id,

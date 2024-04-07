@@ -1,11 +1,10 @@
-package Homework23;
+package com.soroko.project.Homework23;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class AppleStorage implements IStorage<Apple, Long> {
     private String fileName;
