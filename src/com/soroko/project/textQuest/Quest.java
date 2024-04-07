@@ -32,24 +32,20 @@ public class Quest {
                 case 5 -> gamePlay.menuItemSelected(LOAD_GAME);
                 case 6 -> gamePlay.menuItemSelected(RETURN_MENU);
             }
-
+            int step = 0;
             if (menu.getGameIsOn()) {
                 QuestStateMachine stateMachine = QuestStateMachine.Introduction;
                 stateMachine.textOfParagraph();
                 while (menu.getGameIsActive()) {
                     int gameSelector = scan.nextInt();
-                    for (int i = 0; i < QuestStateMachine.LENGTH; i++) {
-                        if (gameSelector == 1) {
-                            stateMachine = stateMachine.firstState();
-                            stateMachine.textOfParagraph();
-                            break;
-                        } else if (gameSelector == 2) {
-                            stateMachine = stateMachine.secondState();
-                            stateMachine.textOfParagraph();
-                            break;
-                        } else if (gameSelector == 3) {
-                            gamePlay.menuItemSelected(RETURN_MENU);
-                        }
+                    if (gameSelector == 1) {
+                        stateMachine = stateMachine.firstState();
+                        stateMachine.textOfParagraph();
+                    } else if (gameSelector == 2) {
+                        stateMachine = stateMachine.secondState();
+                        stateMachine.textOfParagraph();
+                    } else if (gameSelector == 3) {
+                        gamePlay.menuItemSelected(RETURN_MENU);
                     }
                 }
             }
