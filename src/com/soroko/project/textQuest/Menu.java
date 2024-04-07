@@ -1,26 +1,51 @@
 package com.soroko.project.textQuest;
 
 public class Menu {
+    private boolean gameIsOn;
+    private boolean gameIsActive;
 
     public void startGame() {
-        System.out.println("Старт игры");
+       gameIsOn = true;
+        gameIsActive = true;
     }
 
     public void returnGame() {
-        System.out.println("Возврат в игру");
+        gameIsActive = true;
     }
 
     public void exitGame() {
-        System.out.println("Выход из игры");
         System.exit(0);
     }
 
     public void saveGame() {
-        System.out.println("Сохранить игру");
     }
 
     public void loadGame() {
-        System.out.println("Загрузить игру");
+    }
+    public void returnMenu() {
+        gameIsActive = false;
     }
 
+    public void printMenu() {
+        if (!gameIsOn) {
+            System.out.println("1. Начать игру");
+            System.out.println("2. Вернуться к игре");
+            System.out.println("3. Выйти из игры");
+
+        } else if (gameIsOn) {
+            System.out.println("1. Начать игру");
+            System.out.println("2. Вернуться к игре");
+            System.out.println("3. Выйти из игры");
+            System.out.println("4. Сохранить игру");
+            System.out.println("5. Загрузить игру");
+        }
+    }
+
+    public boolean getGameIsOn() {
+        return gameIsOn;
+    }
+
+    public boolean getGameIsActive() {
+        return gameIsActive;
+    }
 }
