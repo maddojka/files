@@ -32,7 +32,6 @@ public class Quest {
                 case 5 -> gamePlay.menuItemSelected(LOAD_GAME);
                 case 6 -> gamePlay.menuItemSelected(RETURN_MENU);
             }
-            int step = 0;
             if (menu.getGameIsOn()) {
                 QuestStateMachine stateMachine = QuestStateMachine.Introduction;
                 stateMachine.textOfParagraph();
