@@ -15,7 +15,7 @@ public enum Paragraph {
 
         @Override
         public String textOfParagraph() {
-            return "TextQuest.FIRST_PARAGRAPH";
+            return TextQuest.FIRST_PARAGRAPH;
         }
     },
     SecondParagraph {

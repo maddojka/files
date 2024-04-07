@@ -28,16 +28,16 @@ public class Main {
         TextQuest textQuest = new TextQuest();
         boolean gameIsOn = true;
         int questStatus = 0;
-        while (gameIsOn) {
-            int selector = scan.nextInt();
-            if (selector == 1) {
-                questStatus++;
-            }
-        }
-        if (questStatus > 13) {
-            gameIsOn = false;
-            questStatus = 0;
-        }
+//        while (gameIsOn) {
+//            int selector = scan.nextInt();
+//            if (selector == 1) {
+//                questStatus++;
+//            }
+//        }
+//        if (questStatus > 13) {
+//            gameIsOn = false;
+//            questStatus = 0;
+//        }
         Paragraph state = Paragraph.FirstParagraph;
         String str = state.textOfParagraph();
         System.out.println(str);
