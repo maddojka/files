@@ -1,14 +1,13 @@
 package com.soroko.project.textQuest;
 
-public class LoadGameCommand extends Command {
-
-    public LoadGameCommand(String code) {
+public class PrintMenuCommand extends Command {
+    public PrintMenuCommand(String code) {
         super(code);
 
     }
 
     @Override
     public void execute(Menu menu) {
-        menu.loadGame();
+        menu.printMenu();
     }
 }

@@ -15,14 +15,17 @@ public class Quest {
         SaveGameCommand saveGameCommand = new SaveGameCommand(SAVE_GAME);
         LoadGameCommand loadGameCommand = new LoadGameCommand(LOAD_GAME);
         ReturnMenuCommand returnMenuCommand = new ReturnMenuCommand(RETURN_MENU);
+        PrintMenuCommand printMenuCommand = new PrintMenuCommand(PRINT_MENU);
         gamePlay.setCommand(startGameCommand);
         gamePlay.setCommand(returnGameCommand);
         gamePlay.setCommand(exitGameCommand);
         gamePlay.setCommand(saveGameCommand);
         gamePlay.setCommand(loadGameCommand);
         gamePlay.setCommand(returnMenuCommand);
+        gamePlay.setCommand(printMenuCommand);
+        QuestStateMachine stateMachine = QuestStateMachine.Introduction;
         while (true) {
-            menu.printMenu();
+            gamePlay.menuItemSelected(PRINT_MENU);
             int menuSelector = scan.nextInt();
             switch (menuSelector) {
                 case 1 -> gamePlay.menuItemSelected(START_GAME);
@@ -32,9 +35,13 @@ public class Quest {
                 case 5 -> gamePlay.menuItemSelected(LOAD_GAME);
                 case 6 -> gamePlay.menuItemSelected(RETURN_MENU);
             }
+
             if (menu.getGameIsOn()) {
-                QuestStateMachine stateMachine = QuestStateMachine.Introduction;
+                QuestStateMachine temp = stateMachine;
                 stateMachine.textOfParagraph();
+                if (menu.getGamePaused()) {
+                    stateMachine = temp;
+                }
                 while (menu.getGameIsActive()) {
                     int gameSelector = scan.nextInt();
                     if (gameSelector == 1) {

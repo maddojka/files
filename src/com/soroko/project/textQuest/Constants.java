@@ -8,6 +8,7 @@ public class Constants {
     public static final String SAVE_GAME = "Сохранить игру";
     public static final String LOAD_GAME = "Загрузить иргу";
     public static final String RETURN_MENU = "Выйти в главное меню";
+    public static final String PRINT_MENU = "Отобразить меню";
 
     public static final String INTRODUCTION = "Каждое утро Лисёнок просыпался, завтракал и шёл увидеться с Бельчонком. " +
             "Это утро не было исключением. Лисёнок пришёл на их \n" +

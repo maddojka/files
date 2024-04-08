@@ -7,6 +7,7 @@ abstract public class Command {
     public Command(String code) {
         this.code = code;
     }
+
     public String getCode() {
         return code;
     }

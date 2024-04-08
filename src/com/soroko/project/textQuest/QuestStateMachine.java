@@ -214,8 +214,10 @@ public enum QuestStateMachine {
             System.out.println(Constants.BRING_THE_HONEY_TO_THE_BEAR);
         }
     };
-    static public final Integer LENGTH = 1 + BringTheHoneyToTheBear.ordinal();
+
     public abstract QuestStateMachine firstState();
+
     public abstract QuestStateMachine secondState();
+
     public abstract void textOfParagraph();
 }
