@@ -3,7 +3,6 @@ package com.soroko.project.Homework24;
 import java.io.*;
 
 public class XORDecryption extends FilterInputStream {
-    private static final int CIPHER = 10;
 
     /**
      * Creates a {@code FilterInputStream}
