@@ -34,7 +34,6 @@ public class Quest {
         // quest logic
         while (true) {
             gamePlay.menuItemSelected(PRINT_MENU);
-            System.out.println(menu.getTitleOfChapter());
             switch (scan.nextInt()) {
                 case 1 -> gamePlay.menuItemSelected(START_GAME);
                 case 2 -> gamePlay.menuItemSelected(RETURN_GAME);
