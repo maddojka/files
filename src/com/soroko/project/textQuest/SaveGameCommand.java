@@ -2,6 +2,7 @@ package com.soroko.project.textQuest;
 
 public class SaveGameCommand extends Command {
 
+
     public SaveGameCommand(String code) {
         super(code);
 
@@ -11,4 +12,5 @@ public class SaveGameCommand extends Command {
     public void execute(Menu menu) {
         menu.saveGame();
     }
+
 }

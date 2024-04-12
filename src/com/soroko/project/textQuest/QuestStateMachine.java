@@ -1,6 +1,8 @@
 package com.soroko.project.textQuest;
 
-public enum QuestStateMachine {
+import java.io.Serializable;
+
+public enum QuestStateMachine implements Serializable {
 
     Introduction {
         @Override
