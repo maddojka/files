@@ -1,14 +1,13 @@
 package com.soroko.project.textQuest;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GamePlay {
+public class MenuInvoker {
     private Map<String, Command> menuCommands = new HashMap<>();
     Menu menu;
 
-    public GamePlay(Menu menu) {
+    public MenuInvoker(Menu menu) {
         this.menu = menu;
     }
 

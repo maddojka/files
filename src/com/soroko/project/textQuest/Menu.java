@@ -9,9 +9,8 @@ public class Menu {
     private boolean gameIsActive;
     private boolean gamePaused;
     private boolean gameSaved;
-    private boolean gameLoaded;
     private String titleOfChapter;
-    QuestStateMachine questStateMachine;
+    private QuestStateMachine questStateMachine;
 
     public Menu(QuestStateMachine questStateMachine) {
         this.questStateMachine = questStateMachine;
@@ -33,20 +32,20 @@ public class Menu {
         return gameSaved;
     }
 
-    public boolean getGameLoaded() {
-        return gameLoaded;
-    }
-
-    public void setGameLoaded(boolean gameLoaded) {
-        this.gameLoaded = gameLoaded;
-    }
-
     public String getTitleOfChapter() {
         return titleOfChapter;
     }
 
     public void setTitleOfChapter(String titleOfChapter) {
         this.titleOfChapter = titleOfChapter;
+    }
+
+    public QuestStateMachine getQuestStateMachine() {
+        return questStateMachine;
+    }
+
+    public void setQuestStateMachine(QuestStateMachine questStateMachine) {
+        this.questStateMachine = questStateMachine;
     }
 
     public void startGame() {
@@ -119,11 +118,5 @@ public class Menu {
         }
     }
 
-    public QuestStateMachine getQuestStateMachine() {
-        return questStateMachine;
-    }
 
-    public void setQuestStateMachine(QuestStateMachine questStateMachine) {
-        this.questStateMachine = questStateMachine;
-    }
 }

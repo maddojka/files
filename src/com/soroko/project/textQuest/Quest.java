@@ -1,5 +1,12 @@
 package com.soroko.project.textQuest;
 
+/**
+ * Quest logic goes here.
+ *
+ * @version 1.0 14 April 2024
+ * @author Yuriy Soroko
+ */
+
 import java.util.Scanner;
 
 import static com.soroko.project.textQuest.Constants.*;
@@ -13,7 +20,7 @@ public class Quest {
         Menu menu = new Menu(stateMachine);
         menu.setTitleOfChapter(stateMachine.toString());
         // Gameplay - creation
-        GamePlay gamePlay = new GamePlay(menu);
+        MenuInvoker gamePlay = new MenuInvoker(menu);
         // commands creation
         StartGameCommand startGameCommand = new StartGameCommand(START_GAME);
         ReturnGameCommand returnGameCommand = new ReturnGameCommand(RETURN_GAME);
@@ -32,35 +39,38 @@ public class Quest {
         gamePlay.setCommand(printMenuCommand);
 
         // quest logic
-        while (true) {
-            gamePlay.menuItemSelected(PRINT_MENU);
-            switch (scan.nextInt()) {
-                case 1 -> gamePlay.menuItemSelected(START_GAME);
-                case 2 -> gamePlay.menuItemSelected(RETURN_GAME);
-                case 3 -> gamePlay.menuItemSelected(EXIT_GAME);
-                case 4 -> gamePlay.menuItemSelected(SAVE_GAME);
-                case 5 -> gamePlay.menuItemSelected(LOAD_GAME);
-                case 6 -> gamePlay.menuItemSelected(RETURN_MENU);
+        while (true) { // menu loop
+            gamePlay.menuItemSelected(PRINT_MENU); // printing menu
+            switch (scan.nextInt()) { // menu selection
+                case 1 -> gamePlay.menuItemSelected(START_GAME); // start game command
+                case 2 -> gamePlay.menuItemSelected(RETURN_GAME); // return game command
+                case 3 -> gamePlay.menuItemSelected(EXIT_GAME); // exit game command
+                case 4 -> gamePlay.menuItemSelected(SAVE_GAME); // save game command
+                case 5 -> gamePlay.menuItemSelected(LOAD_GAME); // load game command
+                case 6 -> gamePlay.menuItemSelected(RETURN_MENU); // return to main menu command
             }
             if (!menu.getGamePaused() && menu.getGameIsOn()) {
                 menu.getQuestStateMachine().textOfParagraph();
-                while (menu.getGameIsActive()) {
-                    int gameSelector = scan.nextInt();
-                    if (gameSelector == 1) {
-                        menu.setQuestStateMachine(menu.getQuestStateMachine().firstState());
-                        menu.getQuestStateMachine().textOfParagraph();
-                        menu.setTitleOfChapter(menu.getQuestStateMachine().toString());
-                    } else if (gameSelector == 2) {
-                        menu.setQuestStateMachine(menu.getQuestStateMachine().secondState());
-                        menu.getQuestStateMachine().textOfParagraph();
-                        menu.setTitleOfChapter(menu.getQuestStateMachine().toString());
-                    } else if (gameSelector == 3) {
-                        gamePlay.menuItemSelected(RETURN_MENU);
+                while (menu.getGameIsActive()) { // game loop
+                    switch (scan.nextInt()) {
+                        case 1 -> { // first branch of logic
+                            menu.setQuestStateMachine(menu.getQuestStateMachine().firstState());
+                            menu.getQuestStateMachine().textOfParagraph();
+                            menu.setTitleOfChapter(menu.getQuestStateMachine().toString());
+                        }
+                        case 2 -> { // second branch of logic
+                            menu.setQuestStateMachine(menu.getQuestStateMachine().secondState());
+                            menu.getQuestStateMachine().textOfParagraph();
+                            menu.setTitleOfChapter(menu.getQuestStateMachine().toString());
+                        }
+                        case 3 -> gamePlay.menuItemSelected(RETURN_MENU); // back to main menu command
                     }
                 }
             }
+
         }
     }
 }
+
 
 
