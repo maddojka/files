@@ -7,20 +7,23 @@ import java.nio.file.Paths;
 import static com.soroko.project.textQuest.Constants.*;
 
 public class Menu {
-    private boolean gameIsOn;
+    private boolean gameStarted;
     private boolean gameIsActive;
     private boolean gamePaused;
     private boolean gameSaved;
+    private boolean gameLoaded;
+    private boolean fileExists;
     private String titleOfChapter;
     private QuestStateMachine questStateMachine;
+    private String username;
 
     public Menu(QuestStateMachine questStateMachine) {
         if (questStateMachine == null) throw new IllegalArgumentException();
         this.questStateMachine = questStateMachine;
     }
 
-    public boolean getGameIsOn() {
-        return gameIsOn;
+    public boolean getGameStarted() {
+        return gameStarted;
     }
 
     public boolean getGameIsActive() {
@@ -31,12 +34,8 @@ public class Menu {
         return gamePaused;
     }
 
-    public boolean getGameSaved() {
-        return gameSaved;
-    }
-
-    public String getTitleOfChapter() {
-        return titleOfChapter;
+    public boolean getFileExists() {
+        return fileExists;
     }
 
     public void setTitleOfChapter(String titleOfChapter) {
@@ -53,8 +52,16 @@ public class Menu {
         this.questStateMachine = questStateMachine;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public void startGame() {
-        this.gameIsOn = true;
+        this.gameStarted = true;
         this.gameIsActive = true;
     }
 
@@ -68,21 +75,20 @@ public class Menu {
     }
 
     public void saveGame() {
-        gameSaved = true;
-        try (PrintWriter out = new PrintWriter(QUEST)) {
+        try (PrintWriter out = new PrintWriter(username + QUEST)) {
             out.print(this.titleOfChapter);
         } catch (IOException ex) {
             System.out.println("Ошибка при попытке чтения в файл");
         }
+        gameSaved = true;
     }
 
     public void loadGame() {
         try {
-            titleOfChapter = new String(Files.readAllBytes(Paths.get(QUEST)));
+            titleOfChapter = new String(Files.readAllBytes(Paths.get(username + QUEST)));
         } catch (IOException | NullPointerException ex) {
             System.out.println("Ошибка при попытке чтения из файла");
         }
-
         switch (titleOfChapter) {
             case "Introduction" -> questStateMachine = QuestStateMachine.Introduction;
             case "HappyEnd" -> questStateMachine = QuestStateMachine.HappyEnd;
@@ -99,6 +105,7 @@ public class Menu {
             case "BringTheHoneyToTheBear" -> questStateMachine = QuestStateMachine.BringTheHoneyToTheBear;
             default -> throw new IllegalArgumentException("Неверное наименование главы");
         }
+        gameLoaded = true;
     }
 
     public void returnMenu() {
@@ -107,20 +114,37 @@ public class Menu {
     }
 
     public void printMenu() {
+        File f = new File(username + QUEST);
+        if (f.exists() && !f.isDirectory()) {
+            fileExists = true;
+        }
         if (gameSaved) {
             System.out.println("2. " + RETURN_GAME);
             System.out.println("3. " + EXIT_GAME);
             System.out.println("4. " + SAVE_GAME);
             System.out.println("5. " + LOAD_GAME);
-        } else if (gameIsOn) {
+        } else if (!fileExists && gameStarted) {
             System.out.println("2. " + RETURN_GAME);
             System.out.println("3. " + EXIT_GAME);
             System.out.println("4. " + SAVE_GAME);
-        } else {
+        } else if (!gameLoaded && !gameStarted && fileExists) {
+            System.out.println("1. " + START_GAME);
+            System.out.println("3. " + EXIT_GAME);
+            System.out.println("4. " + SAVE_GAME);
+            System.out.println("5. " + LOAD_GAME);
+        } else if (gameStarted && fileExists) {
+            System.out.println("2. " + RETURN_GAME);
+            System.out.println("3. " + EXIT_GAME);
+            System.out.println("4. " + SAVE_GAME);
+            System.out.println("5. " + LOAD_GAME);
+        } else if (gameLoaded && fileExists) {
+            System.out.println("1. " + CONTINUE_GAME);
+            System.out.println("3. " + EXIT_GAME);
+            System.out.println("4. " + SAVE_GAME);
+            System.out.println("5. " + LOAD_GAME);
+        }  else {
             System.out.println("1. " + START_GAME);
             System.out.println("3. " + EXIT_GAME);
         }
     }
-
-
 }

@@ -27,6 +27,8 @@ public class GamePlay {
     }
 
     public void startGameLoop() {
+        System.out.println("Введите свое имя на латинице:");
+        menu.setUsername(scanner.next());
         // quest logic
         while (true) { // menu loop
             menuItemSelected(PRINT_MENU); // printing menu
@@ -38,7 +40,7 @@ public class GamePlay {
                 case 5 -> menuItemSelected(LOAD_GAME); // load game command
                 case 6 -> menuItemSelected(RETURN_MENU); // return to main menu command
             }
-            if (!menu.getGamePaused() && menu.getGameIsOn()) {
+            if (!menu.getGamePaused() && menu.getGameStarted()) {
                 menu.getQuestStateMachine().textOfParagraph();
                 while (menu.getGameIsActive()) { // game loop
                     switch (scanner.nextInt()) {

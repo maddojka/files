@@ -3,7 +3,7 @@ package com.soroko.project.textQuest;
 /**
  * Quest logic goes here.
  *
- * @version 1.0 14 April 2024
+ * @version 1.0 13 April 2024
  * @author Yuriy Soroko
  */
 
