@@ -118,7 +118,7 @@ public class Menu {
         if (f.exists() && !f.isDirectory()) {
             fileExists = true;
         }
-        if (gameSaved) {
+        if (gameSaved || (gameStarted && fileExists)) {
             System.out.println("2. " + RETURN_GAME);
             System.out.println("3. " + EXIT_GAME);
             System.out.println("4. " + SAVE_GAME);
@@ -127,13 +127,8 @@ public class Menu {
             System.out.println("2. " + RETURN_GAME);
             System.out.println("3. " + EXIT_GAME);
             System.out.println("4. " + SAVE_GAME);
-        } else if (!gameLoaded && !gameStarted && fileExists) {
+        } else if (!gameLoaded && fileExists) {
             System.out.println("1. " + START_GAME);
-            System.out.println("3. " + EXIT_GAME);
-            System.out.println("4. " + SAVE_GAME);
-            System.out.println("5. " + LOAD_GAME);
-        } else if (gameStarted && fileExists) {
-            System.out.println("2. " + RETURN_GAME);
             System.out.println("3. " + EXIT_GAME);
             System.out.println("4. " + SAVE_GAME);
             System.out.println("5. " + LOAD_GAME);
