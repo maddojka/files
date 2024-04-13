@@ -37,7 +37,6 @@ public class Quest {
         gamePlay.setCommand(loadGameCommand);
         gamePlay.setCommand(returnMenuCommand);
         gamePlay.setCommand(printMenuCommand);
-
         // quest logic
         while (true) { // menu loop
             gamePlay.menuItemSelected(PRINT_MENU); // printing menu
@@ -49,25 +48,7 @@ public class Quest {
                 case 5 -> gamePlay.menuItemSelected(LOAD_GAME); // load game command
                 case 6 -> gamePlay.menuItemSelected(RETURN_MENU); // return to main menu command
             }
-            if (!menu.getGamePaused() && menu.getGameIsOn()) {
-                menu.getQuestStateMachine().textOfParagraph();
-                while (menu.getGameIsActive()) { // game loop
-                    switch (scan.nextInt()) {
-                        case 1 -> { // first branch of logic
-                            menu.setQuestStateMachine(menu.getQuestStateMachine().firstState());
-                            menu.getQuestStateMachine().textOfParagraph();
-                            menu.setTitleOfChapter(menu.getQuestStateMachine().toString());
-                        }
-                        case 2 -> { // second branch of logic
-                            menu.setQuestStateMachine(menu.getQuestStateMachine().secondState());
-                            menu.getQuestStateMachine().textOfParagraph();
-                            menu.setTitleOfChapter(menu.getQuestStateMachine().toString());
-                        }
-                        case 3 -> gamePlay.menuItemSelected(RETURN_MENU); // back to main menu command
-                    }
-                }
-            }
-
+            gamePlay.startGameLoop();
         }
     }
 }

@@ -13,6 +13,7 @@ public class Menu {
     private QuestStateMachine questStateMachine;
 
     public Menu(QuestStateMachine questStateMachine) {
+        if (questStateMachine == null) throw new IllegalArgumentException();
         this.questStateMachine = questStateMachine;
     }
 
@@ -37,6 +38,8 @@ public class Menu {
     }
 
     public void setTitleOfChapter(String titleOfChapter) {
+        if ("".equals(titleOfChapter))
+            throw new IllegalArgumentException("Название главы не может быть пустой строкой");
         this.titleOfChapter = titleOfChapter;
     }
 
