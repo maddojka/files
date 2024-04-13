@@ -34,10 +34,6 @@ public class Menu {
         return gamePaused;
     }
 
-    public boolean getFileExists() {
-        return fileExists;
-    }
-
     public void setTitleOfChapter(String titleOfChapter) {
         if ("".equals(titleOfChapter))
             throw new IllegalArgumentException("Название главы не может быть пустой строкой");
@@ -50,10 +46,6 @@ public class Menu {
 
     public void setQuestStateMachine(QuestStateMachine questStateMachine) {
         this.questStateMachine = questStateMachine;
-    }
-
-    public String getUsername() {
-        return username;
     }
 
     public void setUsername(String username) {
