@@ -20,7 +20,7 @@ public class Quest {
         Menu menu = new Menu(stateMachine);
         menu.setTitleOfChapter(stateMachine.toString());
         // Gameplay - creation
-        MenuInvoker gamePlay = new MenuInvoker(menu);
+        GamePlay gamePlay = new GamePlay(menu);
         // commands creation
         StartGameCommand startGameCommand = new StartGameCommand(START_GAME);
         ReturnGameCommand returnGameCommand = new ReturnGameCommand(RETURN_GAME);

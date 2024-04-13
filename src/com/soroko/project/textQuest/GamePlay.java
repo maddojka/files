@@ -3,11 +3,11 @@ package com.soroko.project.textQuest;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MenuInvoker {
+public class GamePlay {
     private Map<String, Command> menuCommands = new HashMap<>();
     Menu menu;
 
-    public MenuInvoker(Menu menu) {
+    public GamePlay(Menu menu) {
         this.menu = menu;
     }
 

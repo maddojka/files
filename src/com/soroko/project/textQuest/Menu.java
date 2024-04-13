@@ -73,25 +73,25 @@ public class Menu {
 
     public void loadGame() {
         try {
-            this.titleOfChapter = new String(Files.readAllBytes(Paths.get("quest.txt")));
+            titleOfChapter = new String(Files.readAllBytes(Paths.get("quest.txt")));
         } catch (IOException | NullPointerException ex) {
             System.out.println("Ошибка при попытке чтения из файла");
         }
 
-        switch (this.titleOfChapter) {
-            case "Introduction" -> this.questStateMachine = QuestStateMachine.Introduction;
-            case "HappyEnd" -> this.questStateMachine = QuestStateMachine.HappyEnd;
-            case "TryToSearch" -> this.questStateMachine = QuestStateMachine.TryToSearch;
-            case "TryToAskLocals" -> this.questStateMachine = QuestStateMachine.TryToAskLocals;
-            case "UnhappyEndSearch" -> this.questStateMachine = QuestStateMachine.UnhappyEndSearch;
-            case "TryToAskTheOwl" -> this.questStateMachine = QuestStateMachine.TryToAskTheOwl;
-            case "TryToAskTheWolf" -> this.questStateMachine = QuestStateMachine.TryToAskTheWolf;
-            case "TrustTheOwl" -> this.questStateMachine = QuestStateMachine.TrustTheOwl;
-            case "FindTheHoney" -> this.questStateMachine = QuestStateMachine.FindTheHoney;
-            case "UnhappyEndSteal" -> this.questStateMachine = QuestStateMachine.UnhappyEndSteal;
-            case "WaitForTheBees" -> this.questStateMachine = QuestStateMachine.WaitForTheBees;
-            case "UnhappyEndRest" -> this.questStateMachine = QuestStateMachine.UnhappyEndRest;
-            case "BringTheHoneyToTheBear" -> this.questStateMachine = QuestStateMachine.BringTheHoneyToTheBear;
+        switch (titleOfChapter) {
+            case "Introduction" -> questStateMachine = QuestStateMachine.Introduction;
+            case "HappyEnd" -> questStateMachine = QuestStateMachine.HappyEnd;
+            case "TryToSearch" -> questStateMachine = QuestStateMachine.TryToSearch;
+            case "TryToAskLocals" -> questStateMachine = QuestStateMachine.TryToAskLocals;
+            case "UnhappyEndSearch" -> questStateMachine = QuestStateMachine.UnhappyEndSearch;
+            case "TryToAskTheOwl" -> questStateMachine = QuestStateMachine.TryToAskTheOwl;
+            case "TryToAskTheWolf" -> questStateMachine = QuestStateMachine.TryToAskTheWolf;
+            case "TrustTheOwl" -> questStateMachine = QuestStateMachine.TrustTheOwl;
+            case "FindTheHoney" -> questStateMachine = QuestStateMachine.FindTheHoney;
+            case "UnhappyEndSteal" -> questStateMachine = QuestStateMachine.UnhappyEndSteal;
+            case "WaitForTheBees" -> questStateMachine = QuestStateMachine.WaitForTheBees;
+            case "UnhappyEndRest" -> questStateMachine = QuestStateMachine.UnhappyEndRest;
+            case "BringTheHoneyToTheBear" -> questStateMachine = QuestStateMachine.BringTheHoneyToTheBear;
             default -> throw new IllegalArgumentException("Неверное наименование главы");
         }
     }
