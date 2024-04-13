@@ -4,6 +4,8 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import static com.soroko.project.textQuest.Constants.*;
+
 public class Menu {
     private boolean gameIsOn;
     private boolean gameIsActive;
@@ -67,7 +69,7 @@ public class Menu {
 
     public void saveGame() {
         gameSaved = true;
-        try (PrintWriter out = new PrintWriter("quest.txt")) {
+        try (PrintWriter out = new PrintWriter(QUEST)) {
             out.print(this.titleOfChapter);
         } catch (IOException ex) {
             System.out.println("Ошибка при попытке чтения в файл");
@@ -76,7 +78,7 @@ public class Menu {
 
     public void loadGame() {
         try {
-            titleOfChapter = new String(Files.readAllBytes(Paths.get("quest.txt")));
+            titleOfChapter = new String(Files.readAllBytes(Paths.get(QUEST)));
         } catch (IOException | NullPointerException ex) {
             System.out.println("Ошибка при попытке чтения из файла");
         }
@@ -105,19 +107,18 @@ public class Menu {
     }
 
     public void printMenu() {
-        if (!gameIsOn) {
-            System.out.println("1. Начать игру");
-            System.out.println("3. Выйти из игры");
-
-        } else if (gameSaved) {
-            System.out.println("2. Вернуться к игре");
-            System.out.println("3. Выйти из игры");
-            System.out.println("4. Сохранить игру");
-            System.out.println("5. Загрузить игру");
+        if (gameSaved) {
+            System.out.println("2. " + RETURN_GAME);
+            System.out.println("3. " + EXIT_GAME);
+            System.out.println("4. " + SAVE_GAME);
+            System.out.println("5. " + LOAD_GAME);
         } else if (gameIsOn) {
-            System.out.println("2. Вернуться к игре");
-            System.out.println("3. Выйти из игры");
-            System.out.println("4. Сохранить игру");
+            System.out.println("2. " + RETURN_GAME);
+            System.out.println("3. " + EXIT_GAME);
+            System.out.println("4. " + SAVE_GAME);
+        } else {
+            System.out.println("1. " + START_GAME);
+            System.out.println("3. " + EXIT_GAME);
         }
     }
 

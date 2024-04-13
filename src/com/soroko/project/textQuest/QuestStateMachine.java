@@ -1,8 +1,12 @@
 package com.soroko.project.textQuest;
 
-import java.io.Serializable;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
-public enum QuestStateMachine implements Serializable {
+import static com.soroko.project.textQuest.Constants.CHAPTERS;
+
+public enum QuestStateMachine {
 
     Introduction {
         @Override
@@ -17,7 +21,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.INTRODUCTION);
+            try {
+                for (int i = 0; i < 7; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
         }
     },
     HappyEnd {
@@ -33,7 +44,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.HAPPY_END);
+            try {
+                for (int i = 8; i < 11; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
             System.exit(0);
         }
     },
@@ -50,7 +68,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.TRY_TO_SEARCH);
+            try {
+                for (int i = 12; i < 18; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
         }
     },
     TryToAskLocals {
@@ -66,7 +91,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.TRY_TO_ASK_LOCALS);
+            try {
+                for (int i = 19; i < 25; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
         }
     },
     UnhappyEndSearch {
@@ -82,7 +114,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.UNHAPPY_END_SEARCH);
+            try {
+                for (int i = 26; i < 28; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
             System.exit(0);
         }
     },
@@ -99,7 +138,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.TRY_TO_ASK_THE_OWL);
+            try {
+                for (int i = 29; i < 35; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
         }
     },
     TryToAskTheWolf {
@@ -115,7 +161,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.TRY_TO_ASK_THE_WOLF);
+            try {
+                for (int i = 36; i < 42; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
         }
     },
     TrustTheOwl {
@@ -131,7 +184,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.TRUST_THE_OWL);
+            try {
+                for (int i = 43; i < 49; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
         }
     },
     FindTheHoney {
@@ -147,7 +207,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.FIND_THE_HONEY);
+            try {
+                for (int i = 50; i < 56; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
         }
     },
     WaitForTheBees {
@@ -163,7 +230,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.WAIT_FOR_THE_BEES);
+            try {
+                for (int i = 57; i < 63; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
         }
     },
     UnhappyEndRest {
@@ -179,7 +253,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.UNHAPPY_END_REST);
+            try {
+                for (int i = 66; i < 68; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
             System.exit(0);
         }
     },
@@ -196,7 +277,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.UNHAPPY_END_STEAL);
+            try {
+                for (int i = 64; i < 66; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
             System.exit(0);
         }
     },
@@ -213,7 +301,14 @@ public enum QuestStateMachine implements Serializable {
 
         @Override
         public void textOfParagraph() {
-            System.out.println(Constants.BRING_THE_HONEY_TO_THE_BEAR);
+            try {
+                for (int i = 69; i < 75; i++) {
+                    String line = Files.readAllLines(Paths.get(CHAPTERS)).get(i);
+                    System.out.println(line);
+                }
+            } catch (IOException e) {
+                System.out.println("Ошибка при чтении файла");
+            }
         }
     };
 
