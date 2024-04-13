@@ -37,19 +37,8 @@ public class Quest {
         gamePlay.setCommand(loadGameCommand);
         gamePlay.setCommand(returnMenuCommand);
         gamePlay.setCommand(printMenuCommand);
-        // quest logic
-        while (true) { // menu loop
-            gamePlay.menuItemSelected(PRINT_MENU); // printing menu
-            switch (scan.nextInt()) { // menu selection
-                case 1 -> gamePlay.menuItemSelected(START_GAME); // start game command
-                case 2 -> gamePlay.menuItemSelected(RETURN_GAME); // return game command
-                case 3 -> gamePlay.menuItemSelected(EXIT_GAME); // exit game command
-                case 4 -> gamePlay.menuItemSelected(SAVE_GAME); // save game command
-                case 5 -> gamePlay.menuItemSelected(LOAD_GAME); // load game command
-                case 6 -> gamePlay.menuItemSelected(RETURN_MENU); // return to main menu command
-            }
-            gamePlay.startGameLoop();
-        }
+        // start game loop
+        gamePlay.startGameLoop();
     }
 }
 
