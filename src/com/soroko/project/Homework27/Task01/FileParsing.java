@@ -13,6 +13,8 @@ public class FileParsing implements Runnable {
 
 
     public FileParsing(String name, String filePath) {
+        if (filePath == null) throw new IllegalArgumentException("Путь к файлу не может быть null");
+        if (name == null) throw new IllegalArgumentException("Имя потока не может быть null");
         this.name = name;
         this.filePath = filePath;
         t = new Thread(this, name);
