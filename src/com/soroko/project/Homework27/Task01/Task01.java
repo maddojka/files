@@ -1,14 +1,14 @@
-package com.soroko.project.Homework27;
+package com.soroko.project.Homework27.Task01;
 
-public class Task1 {
+public class Task01 {
     public static final String FILE_PATH_1 =
-            "C:\\Users\\yuriy\\IdeaProjects\\lessons\\src\\com\\soroko\\project\\Homework27\\file1.txt";
+            "C:\\Users\\yuriy\\IdeaProjects\\lessons\\src\\com\\soroko\\project\\Homework27\\Task01\\file1.txt";
     public static final String FILE_PATH_2 =
-            "C:\\Users\\yuriy\\IdeaProjects\\lessons\\src\\com\\soroko\\project\\Homework27\\file2.txt";
+            "C:\\Users\\yuriy\\IdeaProjects\\lessons\\src\\com\\soroko\\project\\Homework27\\Task01\\file2.txt";
     public static final String FILE_PATH_3 =
-            "C:\\Users\\yuriy\\IdeaProjects\\lessons\\src\\com\\soroko\\project\\Homework27\\file3.txt";
+            "C:\\Users\\yuriy\\IdeaProjects\\lessons\\src\\com\\soroko\\project\\Homework27\\Task01\\file3.txt";
     public static final String FILE_PATH_4 =
-            "C:\\Users\\yuriy\\IdeaProjects\\lessons\\src\\com\\soroko\\project\\Homework27\\file4.txt";
+            "C:\\Users\\yuriy\\IdeaProjects\\lessons\\src\\com\\soroko\\project\\Homework27\\Task01\\file4.txt";
 
     public static void main(String[] args) throws InterruptedException {
         FileParsing fileParsing1 = createAndStart("firstThread", FILE_PATH_1);
