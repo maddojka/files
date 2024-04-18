@@ -11,17 +11,11 @@ public class Task01 {
             "C:\\Users\\yuriy\\IdeaProjects\\lessons\\src\\com\\soroko\\project\\Homework27\\Task01\\file4.txt";
 
     public static void main(String[] args) throws InterruptedException {
+
         FileParsing fileParsing1 = createAndStart("firstThread", FILE_PATH_1);
-        fileParsing1.getT().join();
-        System.out.println();
         FileParsing fileParsing2 = createAndStart("secondThread", FILE_PATH_2);
-        fileParsing2.getT().join();
-        System.out.println();
         FileParsing fileParsing3 = createAndStart("thirdThread", FILE_PATH_3);
-        fileParsing3.getT().join();
-        System.out.println();
         FileParsing fileParsing4 = createAndStart("fourthThread", FILE_PATH_4);
-        fileParsing4.getT().join();
     }
 
     public static FileParsing createAndStart(String name, String filePath) {

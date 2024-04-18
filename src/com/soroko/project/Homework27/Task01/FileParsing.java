@@ -10,7 +10,7 @@ public class FileParsing implements Runnable {
     private File file;
     private Thread t;
     private String filePath;
-
+    private int counter;
 
     public FileParsing(String name, String filePath) {
         if (filePath == null) throw new IllegalArgumentException("Путь к файлу не может быть null");
@@ -19,17 +19,19 @@ public class FileParsing implements Runnable {
         this.filePath = filePath;
         t = new Thread(this, name);
         file = new File(filePath);
+        counter = 0;
     }
 
     public Thread getT() {
         return t;
     }
 
+    public int getCounter() {
+        return counter;
+    }
+
     public void parseFile() {
-        int counter = 0;
         boolean dataExists = false;
-        System.out.println("Результат чтения файла: " +  this.filePath);
-        System.out.println("События с приоритетом 7 и выше:");
         try (Scanner scan = new Scanner(file);) {
             while (scan.hasNext()) {
                 String nextLine = scan.nextLine();
