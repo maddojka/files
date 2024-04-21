@@ -1,0 +1,50 @@
+Like most computing terms, concurrency is tricky to pin down. Informally, a concurrent program is
+one that does more than one thing at a time. For example, a web browser may be simultaneously
+performing an HTTP GET request to get an HTML page, playing an audio clip, displaying the number
+of bytes received of some image, and engaging in an advisory dialog with a user. However, this
+simultaneity is sometimes an illusion. On some computer systems these different activities might
+indeed be performed by different CPUs. But on other systems they are all performed by a single timeshared
+CPU that switches among different activities quickly enough that they appear to be
+simultaneous, or at least nondeterministically interleaved, to human observers.
+A more precise, though not very interesting definition of concurrent programming can be phrased
+operationally: A Java virtual machine and its underlying operating system (OS) provide mappings
+from apparent simultaneity to physical parallelism (via multiple CPUs), or lack thereof, by allowing
+independent activities to proceed in parallel when possible and desirable, and otherwise by timesharing.
+Concurrent programming consists of using programming constructs that are mapped in this
+way. Concurrent programming in the Java programming language entails using Java programming
+language constructs to this effect, as opposed to system-level constructs that are used to create new
+operating system processes. By convention, this notion is further restricted to constructs affecting a
+single JVM, as opposed to distributed programming, for example using remote method invocation
+(RMI), that involves multiple JVMs residing on multiple computer systems.
+Concurrency and the reasons for employing it are better captured by considering the nature of a few
+common types of concurrent applications:
+Web services. Most socket-based web services (for example, HTTP daemons, servlet engines, and
+application servers) are multithreaded. Usually, the main motivation for supporting multiple
+concurrent connections is to ensure that new incoming connections do not need to wait out completion
+of others. This generally minimizes service latencies and improves availability.
+Number crunching. Many computation-intensive tasks can be parallelized, and thus execute more
+quickly if multiple CPUs are present. Here the goal is to maximize throughput by exploiting
+parallelism.
+I/O processing. Even on a nominally sequential computer, devices that perform reads and writes on
+disks, wires, etc., operate independently of the CPU. Concurrent programs can use the time otherwise
+wasted waiting for slow I/O, and can thus make more efficient use of a computer's resources.
+Simulation. Concurrent programs can simulate physical objects with independent autonomous
+behaviors that are hard to capture in purely sequential programs.
+GUI-based applications. Even though most user interfaces are intentionally single-threaded, they
+often establish or communicate with multithreaded services. Concurrency enables user controls to stay
+responsive even during time-consuming actions.
+Component-based software. Large-granularity software components (for example those providing
+design tools such as layout editors) may internally construct threads in order to assist in bookkeeping,
+provide multimedia support, achieve greater autonomy, or improve performance.
+Mobile code. Frameworks such as the java.applet package execute downloaded code in
+separate threads as one part of a set of policies that help to isolate, monitor, and control the effects of
+unknown code.
+Embedded systems. Most programs running on small dedicated devices perform real-time control.
+Multiple components each continuously react to external inputs from sensors or other devices, and
+produce external outputs in a timely manner. As defined in The Java™ Language Specification, the
+Java platform does not support hard real-time control in which system correctness depends on actions
+being performed by certain deadlines. Particular run-time systems may provide the stronger
+guarantees required in some safety-critical hard-real-time systems. But all JVM implementations
+support soft real-time control, in which timeliness and performance are considered quality-of-service
+issues rather than correctness issues (see § 1.3.3). This reflects portability goals that enable the JVM to
+be implemented on modern opportunistic, multipurpose hardware and system software.
